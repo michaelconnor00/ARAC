@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<TrackingData>
+  <Sensors>
+    <Sensor type="ParallelEdgeAndFeatureTrackingSensor">
+      <SensorID>Parallel</SensorID>
+      <Parameters>
+        <HybridTracking>
+          <Mode> <!-- "initialize_once", "edge_only" or "hybrid"--> </Mode> 
+          <!-- additional hybrid tracking parameters -->
+        </HybridTracking>
+        <EdgeTracker>
+          <Parameters>
+            <MapCreationActive>0</MapCreationActive>
+            <EdgeBasedTracking>1</EdgeBasedTracking> 
+            <UseSensorsForPoseCreation> <!-- "off", "gravity", "gravity_and_compass" or "all" --> </UseSensorsForPoseCreation>
+
+            <TriangleMesh></TriangleMesh>
+            <InitialPose>InitialPose.xml</InitialPose>
+
+            <AutoInit> <!-- auto init parameters --> </AutoInit>
+            <EdgeAlignment> 
+              <LineModel>edges.obj</LineModel>
+              <MinQuality> <!-- value in [0,1], for initialization --> </MinQuality>
+              <SearchRangeRelative> <!-- value in [0,1], for initialization --> </SearchRangeRelative>
+              <!-- One of NumFeatures or EdgeSampling: -->
+              <NumFeatures> <!-- fixed number of features --> </NumFeatures> 
+              <EdgeSampling> <!-- model specific number of features --> </EdgeSampling>
+
+              <VisibilityTest>
+                <Enabled>true</Enabled>
+                <!-- additional visibility testing parameters -->
+              </VisibilityTest>
+              <!-- additional edge alignment parameters -->
+            </EdgeAlignment>
+            <EdgeTracking> 
+              <MinQuality><!-- value in [0,1], for tracking --> </MinQuality>
+              <SearchRangeRelative><!-- value in [0,1], for tracking --> </SearchRangeRelative>
+              <NumIterations>4</NumIterations>
+
+              <NumFeatures>0</NumFeatures>
+              <EdgeSampling>4</EdgeSampling>
+              <!-- additional edge tracking parameters -->
+            </EdgeTracking>
+          </Parameters>
+        </EdgeTracker>
+        <!-- Parameters for SLAM feature tracking -->
+        <SLAM version="2">
+          <Parameters/>
+          <SensorCOS>
+            <SensorCosID>SLAM</SensorCosID>
+            <Parameters> <!-- SLAM tracking parameters --> </Parameters>
+          </SensorCOS>
+        </SLAM>
+      </Parameters>
+
+      <!-- COS 1 Name -->
+      <SensorCOS>
+        <SensorCosID>TrackingPose</SensorCosID>
+      </SensorCOS>
+      <!-- COS 2 Name -->
+      <SensorCOS>
+        <SensorCosID>InitialPose</SensorCosID>
+      </SensorCOS>
+    </Sensor>
+  </Sensors>
+
+  <Connections>
+    <!-- COS 1 contains the tracking pose -->
+    <COS>
+      <!-- Optional Fuser -->
+      <Fuser Type="SmoothingFuser">
+        <Parameters> <!-- Fuser parameters --> </Parameters>
+      </Fuser>
+      <Name>TrackingPose</Name>
+      <SensorSource>
+        <SensorID>Parallel</SensorID>
+        <SensorCosID>TrackingPose</SensorCosID>
+      </SensorSource>
+    </COS>
+    <!-- COS 2 contains the initial pose -->
+    <COS>
+      <Name>InitialPose</Name>
+      <SensorSource>
+        <SensorID>Parallel</SensorID>
+        <SensorCosID>InitialPose</SensorCosID>
+      </SensorSource>
+    </COS>
+  </Connections>
+</TrackingData>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<TrackingData>
+  <Sensors>
+    <Sensor Type="EdgeBasedInitializationSensorSource">
+      <SensorID>EdgeBasedInitialization</SensorID>
+      <Parameters>
+        <TriangleMesh>TriangleMesh.obj</TriangleMesh>
+        <TrackingConfiguration>InitialPose.xml</TrackingConfiguration>
+        <UseSensorsForPoseCreation>off</UseSensorsForPoseCreation>
+        <OriginCoordinates> 
+          <Latitude>0.0</Latitude>
+          <Longitude>0.0</Longitude>
+        </OriginCoordinates>
+        <InitializationTestMode>false</InitializationTestMode>
+        <AutoInit> <!-- auto init parameters --> </AutoInit>
+        <EdgeAlignment> <!-- edge alignment parameters --> </EdgeAlignment>
+        <FeatureTracking> <!-- feature tracking parameters --> </FeatureTracking>
+      </Parameters>
+      <!-- COS 1 Name -->
+      <SensorCOS>
+        <SensorCosID>TrackingPose</SensorCosID>
+      </SensorCOS>
+      <!-- COS 2 Name -->
+      <SensorCOS>
+        <SensorCosID>InitialPose</SensorCosID>
+      </SensorCOS>
+    </Sensor>
+  </Sensors>
+  <Connections>
+    <!-- COS 1 contains the tracking pose -->
+    <COS>
+      <Name>TrackingPose</Name>
+      <SensorSource>
+        <SensorID>EdgeBasedInitialization</SensorID>
+        <SensorCosID>TrackingPose</SensorCosID>
+      </SensorSource>
+    </COS>
+    <!-- COS 2 contains the initial pose -->
+    <COS>
+      <Name>InitialPose</Name>
+      <SensorSource>
+        <SensorID>EdgeBasedInitialization</SensorID>
+        <SensorCosID>InitialPose</SensorCosID>
+      </SensorSource>
+    </COS>
+  </Connections>
+</TrackingData>
