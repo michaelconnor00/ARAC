@@ -3,8 +3,10 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
+/app/build
 /build
-../metaioSDK/build
-../metaioSDK/local.properties
-../metaioSDK/.idea/workspace.xml
-../metaioSDK/.idea/libraries
+/metaioSDK/build
+/metaioSDK/gen
+/metaioSDK/local.properties
+/metaioSDK/.idea/workspace.xml
+/metaioSDK/.idea/libraries
