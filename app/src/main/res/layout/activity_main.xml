@@ -9,4 +9,51 @@
     tools:context="ca.unbc.connor.arac.MainActivity">
 
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@mipmap/md_logo"
+        android:contentDescription="@string/assess_logo"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_modman"
+        android:onClick="launchModelManager"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_margin="10dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@color/primary_material_dark"
+        android:textColor="@color/White"
+        />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_calibration"
+        android:onClick="launchCalibration"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_margin="10dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@color/BlueAwesome"
+        />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_settings"
+        android:onClick="launchSettings"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:layout_margin="10dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@color/BlueAwesome"
+        />
+
+
 </RelativeLayout>

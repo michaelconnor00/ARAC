@@ -45,8 +45,8 @@
         android:required="false" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/md_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -64,12 +64,17 @@
         <activity
             android:name=".Template"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-             >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        </activity>
+        <activity
+            android:name=".ModelManagerActivity"
+            android:label="@string/title_activity_model_manager"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.unbc.md.arac.MainActivity" />
         </activity>
     </application>
 
-</manifest>
-
-<!--Preamble: android:installLocation="preferExternal"-->
-<!--TEmplate: android:label="@string/title_activity_template"-->
+</manifest> <!-- Preamble: android:installLocation="preferExternal" -->
+<!-- TEmplate: android:label="@string/title_activity_template" -->
