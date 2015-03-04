@@ -92,8 +92,8 @@ public class MainActivity extends Activity
             if (result)
             {
                 // Start AR Activity on success
-//                Intent intent = new Intent(getApplicationContext(), Template.class);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), Template.class);
+                startActivity(intent);
             }
             else
             {
