@@ -7,7 +7,6 @@ import android.content.res.Resources.Theme;
 import android.graphics.Camera;
 import android.os.Bundle;
 import android.util.Log;
-import ca.unbc.md.arac.R;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
@@ -27,16 +26,29 @@ import com.metaio.sdk.jni.VisualSearchResponseVector;
 import com.metaio.tools.io.AssetsManager;
 
 public class Template extends ARViewActivity {
+
+
     private MetaioSDKCallbackHandler mSDKCallback;
     private VisualSearchCallbackHandler mVisualSearchCallback;
 
 
+    //--- Tracking Markers:
     // / Must provide all marker position offsets in setup, or exception will be thrown
     private final int number_of_tracking_markers = 10;
     private TrackingMarker[] tracking_markers = new TrackingMarker[number_of_tracking_markers];
 
-    private String tracking_configuration_filename = "TrackingData_10_Marker.xml";
-    private String geometry_filename = "wood_block_3_holes.zip";
+    //--- Tracking Data XML Configuration File
+    //private String tracking_configuration_filename = "TrackingData_10_Marker.xml";
+    private String tracking_configuration_filename = "TrackingData_10_Marker_Medium_Smoothing_Fuser.xml";
+    //private String tracking_configuration_filename = "TrackingData_6_Marker_Heavy_Smoothing_Fuser.xml";
+    //private String tracking_configuration_filename = "TrackingData_6_Marker_Medium_Smoothing_Fuser.xml";
+
+    //--- 3D Geometry File:
+    //private String geometry_filename = "wood_block_3_holes.zip";
+    //private String geometry_filename = "722_462_Big_Green.zip";
+    //private String geometry_filename = "ruler_obj.zip";
+    private String geometry_filename = "Starry_Night.png";
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,34 +102,39 @@ public class Template extends ARViewActivity {
                 getApplicationContext(), geometry_filename);
 
         if (model_file != null) {
-
-            TrackingMarker tracking_marker;
-            IGeometry design_object;
-            TrackingMarkerPosition marker_position;
-
-            for (int i = 1; i <= number_of_tracking_markers; i++) {
-
-                // Loading 3D geometry
-                design_object = metaioSDK.createGeometry(model_file);
-
-                if (design_object != null) {
-
-                    // design_object.setScale(scale);
-                    // design_object.setOcclusionMode(true);
-                    // design_object.setDebugDataVisibility(EDEBUG_VISIBILITY.EDV_FULL)
-
-                    design_object.setCoordinateSystemID(i);
-                    design_object.setName("" + i);
-                    design_object.setVisible(false);
-                    design_object.setTransparency(0.5f);
-
-                    // Set the translation offsets and rotation for each
-                    // specific marker ID.
-                    Rotation rotation = new Rotation(new Vector3d(
-                            (float) Math.PI / 2, 0.0f, 0.0f));
+            // Do setup based on content type (.obj or .png)
+            if (is_file_type_image(geometry_filename)) {
+                setup_tracking_for_2d_image(model_file);
+            } else {
+                setup_tracking_for_3d_model(model_file);
+            }
+        }
+    }
 
 
-                    // Offset Configuration for square tool:
+    private void setup_tracking_for_2d_image(File model_file) throws Exception {
+        TrackingMarker tracking_marker;
+        IGeometry design_object;
+        TrackingMarkerPosition marker_position;
+
+        for (int i = 1; i <= number_of_tracking_markers; i++) {
+
+            // Loading Image
+            design_object = metaioSDK.createGeometryFromImage(model_file);
+
+            if (design_object != null) {
+
+                design_object.setCoordinateSystemID(i);
+                design_object.setName("" + i);
+                design_object.setVisible(false);
+                design_object.setTransparency(0.5f);
+
+                // Set the translation offsets and rotation for each
+                // specific marker ID.
+                Rotation rotation = new Rotation(new Vector3d(
+                        (float) 0.0f, 0.0f, 0.0f));
+
+                // Offset Configuration for square tool:
 //					switch (i) {
 //					case 1:
 //						marker_position = new TrackingMarkerPosition(30, 17, 1,
@@ -149,108 +166,276 @@ public class Template extends ARViewActivity {
 //					}
 
 
-                    // Offset configuration for workbench space
-                    switch (i) {
-                        case 1:
-                            marker_position = new TrackingMarkerPosition(62, 62, 1,
-                                    rotation);
-                            break;
-                        case 2:
-                            marker_position = new TrackingMarkerPosition(62, -203,
-                                    1, rotation);
-                            break;
-                        case 3:
-                            marker_position = new TrackingMarkerPosition(62, -467,
-                                    1, rotation);
-                            break;
-                        case 4:
-                            marker_position = new TrackingMarkerPosition(-202, -467,
-                                    1, rotation);
-                            break;
-                        case 5:
-                            marker_position = new TrackingMarkerPosition(-484, -468,
-                                    1, rotation);
-                            break;
-                        case 6:
-                            marker_position = new TrackingMarkerPosition(-773, -469,
-                                    1, rotation);
-                            break;
-                        case 7:
-                            marker_position = new TrackingMarkerPosition(-773, -192,
-                                    1, rotation);
-                            break;
-                        case 8:
-                            marker_position = new TrackingMarkerPosition(-773, 62,
-                                    1, rotation);
-                            break;
-                        case 9:
-                            marker_position = new TrackingMarkerPosition(-485, 62,
-                                    1, rotation);
-                            break;
-                        case 10:
-                            marker_position = new TrackingMarkerPosition(-202, 62,
-                                    1, rotation);
-                            break;
-                        default:
-                            throw new Exception(
-                                    "A Marker ID's position offset was not specified in setupTracking()");
-                    }
+                // Offset configuration for workbench space
+                switch (i) {
+                    case 1:
+                        marker_position = new TrackingMarkerPosition(62, 62, 20,
+                                rotation);
+                        break;
+                    case 2:
+                        marker_position = new TrackingMarkerPosition(62, -203,
+                                20, rotation);
+                        break;
+                    case 3:
+                        marker_position = new TrackingMarkerPosition(62, -467,
+                                20, rotation);
+                        break;
+                    case 4:
+                        marker_position = new TrackingMarkerPosition(-202, -467,
+                                20, rotation);
+                        break;
+                    case 5:
+                        marker_position = new TrackingMarkerPosition(-484, -468,
+                                20, rotation);
+                        break;
+                    case 6:
+                        marker_position = new TrackingMarkerPosition(-773, -469,
+                                20, rotation);
+                        break;
+                    case 7:
+                        marker_position = new TrackingMarkerPosition(-773, -192,
+                                20, rotation);
+                        break;
+                    case 8:
+                        marker_position = new TrackingMarkerPosition(-773, 62,
+                                20, rotation);
+                        break;
+                    case 9:
+                        marker_position = new TrackingMarkerPosition(-485, 62,
+                                20, rotation);
+                        break;
+                    case 10:
+                        marker_position = new TrackingMarkerPosition(-202, 62,
+                                20, rotation);
+                        break;
+                    default:
+                        throw new Exception("A Marker ID's position offset was not specified in setupTracking()");
+                }
 
 
-                    // Set No marker offsets:
-					/*
-					 * marker_position = new TrackingMarkerPosition(0, 0, 1,
-					 * rotation);
-					 */
+                // Set No marker offsets:
+
+                // marker_position = new TrackingMarkerPosition(0, 0, 1,
+                // rotation);
 
 
+                design_object.setTranslation(new Vector3d(
+                        marker_position.x_offset, marker_position.y_offset,
+                        marker_position.z_offset));
+                design_object.setRotation(marker_position.rotation);
 
-                    design_object.setTranslation(new Vector3d(
-                            marker_position.x_offset, marker_position.y_offset,
-                            marker_position.z_offset));
-                    design_object.setRotation(marker_position.rotation);
+                tracking_marker = new TrackingMarker(i, design_object);
 
-                    tracking_marker = new TrackingMarker(i, design_object);
+                // Add reference of marker to our list.
+                tracking_markers[i - 1] = tracking_marker;
 
-                    // Add reference of marker to our list.
-                    tracking_markers[i - 1] = tracking_marker;
+            } else
+                MetaioDebug.log(Log.ERROR, "Error loading geometry: "
+                        + design_object);
+        }
+    }
 
-                } else
-                    MetaioDebug.log(Log.ERROR, "Error loading geometry: "
-                            + design_object);
-            }
+
+    private void setup_tracking_for_3d_model(File model_file) throws Exception {
+
+        TrackingMarker tracking_marker;
+        IGeometry design_object;
+        TrackingMarkerPosition marker_position;
+
+        for (int i = 1; i <= number_of_tracking_markers; i++) {
+
+            // Loading 3D geometry
+            design_object = metaioSDK.createGeometryFromImage(model_file);
+
+            if (design_object != null) {
+
+                design_object.setCoordinateSystemID(i);
+                design_object.setName("" + i);
+                design_object.setVisible(false);
+                design_object.setTransparency(0.5f);
+
+                // Set the translation offsets and rotation for each
+                // specific marker ID.
+                Rotation rotation = new Rotation(new Vector3d(
+                        (float) Math.PI / 2, 0.0f, 0.0f));
+
+
+                // Offset Configuration for square tool:
+//					switch (i) {
+//					case 1:
+//						marker_position = new TrackingMarkerPosition(30, 17, 1,
+//								rotation);
+//						break;
+//					case 2:
+//						marker_position = new TrackingMarkerPosition(30, -172,
+//								1, rotation);
+//						break;
+//					case 3:
+//						marker_position = new TrackingMarkerPosition(30, -365,
+//								1, rotation);
+//						break;
+//					case 4:
+//						marker_position = new TrackingMarkerPosition(30, -548,
+//								1, rotation);
+//						break;
+//					case 5:
+//						marker_position = new TrackingMarkerPosition(-153, 19,
+//								1, rotation);
+//						break;
+//					case 6:
+//						marker_position = new TrackingMarkerPosition(-335, 18,
+//								1, rotation);
+//						break;
+//					default:
+//						throw new Exception(
+//								"A Marker ID's position offset was not specified in setupTracking()");
+//					}
+
+
+                // Offset configuration for workbench space
+                switch (i) {
+                    case 1:
+                        marker_position = new TrackingMarkerPosition(62, 62, 20,
+                                rotation);
+                        break;
+                    case 2:
+                        marker_position = new TrackingMarkerPosition(62, -203,
+                                20, rotation);
+                        break;
+                    case 3:
+                        marker_position = new TrackingMarkerPosition(62, -467,
+                                20, rotation);
+                        break;
+                    case 4:
+                        marker_position = new TrackingMarkerPosition(-202, -467,
+                                20, rotation);
+                        break;
+                    case 5:
+                        marker_position = new TrackingMarkerPosition(-484, -468,
+                                20, rotation);
+                        break;
+                    case 6:
+                        marker_position = new TrackingMarkerPosition(-773, -469,
+                                20, rotation);
+                        break;
+                    case 7:
+                        marker_position = new TrackingMarkerPosition(-773, -192,
+                                20, rotation);
+                        break;
+                    case 8:
+                        marker_position = new TrackingMarkerPosition(-773, 62,
+                                20, rotation);
+                        break;
+                    case 9:
+                        marker_position = new TrackingMarkerPosition(-485, 62,
+                                20, rotation);
+                        break;
+                    case 10:
+                        marker_position = new TrackingMarkerPosition(-202, 62,
+                                20, rotation);
+                        break;
+                    default:
+                        throw new Exception("A Marker ID's position offset was not specified in setupTracking()");
+                }
+
+
+                // Set No marker offsets:
+
+                // marker_position = new TrackingMarkerPosition(0, 0, 1,
+                // rotation);
+
+
+                design_object.setTranslation(new Vector3d(
+                        marker_position.x_offset, marker_position.y_offset,
+                        marker_position.z_offset));
+                design_object.setRotation(marker_position.rotation);
+
+                tracking_marker = new TrackingMarker(i, design_object);
+
+                // Add reference of marker to our list.
+                tracking_markers[i - 1] = tracking_marker;
+
+            } else
+                MetaioDebug.log(Log.ERROR, "Error loading geometry: "
+                        + design_object);
         }
     }
 
     @Override
     protected void onGeometryTouched(IGeometry geometry) {
-		/*
-		 * MetaioDebug.log("Template.onGeometryTouched: " + geometry);
-		 *
-		 * if (geometry != mEarthOcclusion) { if (!mEarthOpened) {
-		 * mEarth.startAnimation("Open", false);
-		 * mEarthIndicators.startAnimation("Grow", false); mEarthOpened = true;
-		 * } else { mEarth.startAnimation("Close", false);
-		 * mEarthIndicators.startAnimation("Shrink", false); mEarthOpened =
-		 * false; } }
-		 */
 
     }
 
-    // Setup auto-focus
-    // public void onSurfaceCreated() {
-    //
-    // android.hardware.Camera camera = IMetaioSDKAndroid.getCamera(this);
-    // android.hardware.Camera.Parameters params = camera.getParameters();
-    // camera.setParameters(params);
-    //
-    // }
+
+    protected boolean is_file_type_image(String content_filename) {
+       String file_extension = content_filename.substring(content_filename.indexOf('.'));
+       if (file_extension.equalsIgnoreCase(".png")) {
+            return true;
+       } else {
+            return false;
+       }
+    }
 
     @Override
     protected IMetaioSDKCallback getMetaioSDKCallbackHandler() {
         return mSDKCallback;
     }
 
+
+
+
+    //////////////////// START Public Interface ////////////////////////////////////////////////////
+
+
+    /*
+    Used to reinitialize tracking.
+     */
+    public void run_tracking_setup(){
+
+    }
+
+    /*
+    Used to stop current tracking processes.
+     */
+    public void terminate_tracking_processes(){
+
+    }
+
+    /*
+    Returns reference to the list of tracking markers and their associated geometries
+     */
+    public TrackingMarker[] get_tracking_markers(){
+        return tracking_markers;
+    }
+
+    public String get_tracking_configuration_filename(){
+        return tracking_configuration_filename;
+    }
+
+    public String get_virtual_geometry_filename(){
+        return geometry_filename;
+    }
+
+    public void set_tracking_markers(TrackingMarker[] updated_tracking_markers){
+        tracking_markers = updated_tracking_markers;
+    }
+
+    public void set_tracking_configuration_filename(String updated_tracking_filename){
+        tracking_configuration_filename = updated_tracking_filename;
+    }
+
+    public void set_virtual_geometry_filename(String updated_geometry_filename){
+        geometry_filename = updated_geometry_filename;
+    }
+
+    //////////////////// END Public Interface //////////////////////////////////////////////////////
+
+
+
+
+    /*
+    Handles all the call back events from the Metaio SDK
+     */
     final class MetaioSDKCallbackHandler extends IMetaioSDKCallback {
 
         @Override
@@ -282,7 +467,7 @@ public class Template extends ARViewActivity {
             for (int i = 0; i < tracking_markers.length; i++) {
                 tracking_markers[i].tracking_state = false;
                 tracking_markers[i].marker_3d_content.setVisible(false);
-                if (tracking_markers[i].tracking_quality >= minimum_quality_threshhold
+                if (tracking_markers[i].tracking_quality > minimum_quality_threshhold
                         && tracking_markers[i].tracking_quality > best_tracking_quality) {
                     best_tracking_quality = tracking_markers[i].tracking_quality;
                     best_quality_index = i;
@@ -294,7 +479,7 @@ public class Template extends ARViewActivity {
                 tracking_markers[best_quality_index].marker_3d_content.setVisible(true);
 
                 // Logging:
-                System.out.println("Chosen Tracking Marker: "+ (best_quality_index + 1));
+                System.out.println("Chosen Tracking Marker: " + (best_quality_index + 1));
                 System.out.println("Chosen Marker's Tracking Quality: " + best_tracking_quality);
 
             } else {
@@ -366,6 +551,3 @@ public class Template extends ARViewActivity {
         }
     }
 }
-
-
-
