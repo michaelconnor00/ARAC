@@ -33,8 +33,8 @@ public class MainActivity extends Activity
         MetaioDebug.enableLogging(BuildConfig.DEBUG);
 
         // extract all the assets
-        mTask = new AssetsExtracter();
-        mTask.execute(0);
+//        mTask = new AssetsExtracter();
+//        mTask.execute(0);
     }
 
     /**
