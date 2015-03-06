@@ -14,13 +14,9 @@ import ca.unbc.md.arac.R;
 import com.metaio.sdk.MetaioDebug;
 import com.metaio.tools.io.AssetsManager;
 
-public class MainActivity extends Activity
-{
+public class MainActivity extends Activity {
 
-    /**
-     * Task that will extract all the assets
-     */
-    private AssetsExtracter mTask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,9 +28,6 @@ public class MainActivity extends Activity
         // Enable metaio SDK debug log messages based on build configuration
         MetaioDebug.enableLogging(BuildConfig.DEBUG);
 
-        // extract all the assets
-//        mTask = new AssetsExtracter();
-//        mTask.execute(0);
     }
 
     /**
@@ -49,68 +42,22 @@ public class MainActivity extends Activity
     }
 
     public void launchCalibration(View view){
-
+        Intent intent = new Intent(this, CalibrationActivity.class);
+        startActivity(intent);
     }
 
     public void launchSettings(View view){
-
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     public void launchAdjust(View view){
-        
-    }
-
-    /**
-     * This task extracts all the application assets to an external or internal location
-     * to make them accessible to Metaio SDK
-     */
-    private class AssetsExtracter extends AsyncTask<Integer, Integer, Boolean>
-    {
-
-        @Override
-        protected void onPreExecute(){
-
-        }
-
-        @Override
-        protected Boolean doInBackground(Integer... params)
-        {
-            try
-            {
-                // Extract all assets and overwrite existing files if debug build
-                AssetsManager.extractAllAssets(getApplicationContext(), BuildConfig.DEBUG);
-            }
-            catch (IOException e)
-            {
-                MetaioDebug.log(Log.ERROR, "Error extracting assets: "+e.getMessage());
-                MetaioDebug.printStackTrace(Log.ERROR, e);
-                return false;
-            }
-
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean result)
-        {
-            if (result)
-            {
-                // Start AR Activity on success
-                Intent intent = new Intent(getApplicationContext(), Template.class);
-                startActivity(intent);
-            }
-            else
-            {
-                // Show a toast with an error message
-                Toast toast = Toast.makeText(getApplicationContext(), "Error extracting application assets!", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-            }
-
-            finish();
-        }
 
     }
+
+
+
+
 
 }
 

@@ -7,6 +7,7 @@ import android.content.res.Resources.Theme;
 import android.graphics.Camera;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
@@ -85,6 +86,12 @@ public class Template extends ARViewActivity {
         } catch (Exception e) {
             MetaioDebug.log(Log.ERROR, "Failed to load content: " + e);
         }
+    }
+
+    public void launchAdjust(View view) {
+
+        // Load popup window??
+
     }
 
     protected void setupTracking() throws Exception {

@@ -69,12 +69,35 @@
         <activity
             android:name=".ModelManagerActivity"
             android:label="@string/title_activity_model_manager"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.unbc.md.arac.MainActivity" />
+                android:value="ca.unbc.md.arac.MainActivity"
+                />
+        </activity>
+        <activity
+            android:name=".CalibrationActivity"
+            android:label="@string/title_activity_calibration"
+            android:parentActivityName=".MainActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.unbc.md.arac.MainActivity"
+                />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.unbc.md.arac.MainActivity"
+                />
         </activity>
     </application>
 
-</manifest> <!-- Preamble: android:installLocation="preferExternal" -->
+</manifest>
+<!-- Preamble: android:installLocation="preferExternal" -->
 <!-- TEmplate: android:label="@string/title_activity_template" -->
