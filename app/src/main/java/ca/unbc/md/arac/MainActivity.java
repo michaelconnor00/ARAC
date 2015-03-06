@@ -56,6 +56,10 @@ public class MainActivity extends Activity
 
     }
 
+    public void launchAdjust(View view){
+        
+    }
+
     /**
      * This task extracts all the application assets to an external or internal location
      * to make them accessible to Metaio SDK
