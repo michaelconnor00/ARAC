@@ -28,6 +28,8 @@ import com.metaio.tools.io.AssetsManager;
 
 public class Template extends ARViewActivity {
 
+    boolean DEBUG_OUT = false;
+
 
     private MetaioSDKCallbackHandler mSDKCallback;
     private VisualSearchCallbackHandler mVisualSearchCallback;
@@ -54,7 +56,6 @@ public class Template extends ARViewActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // mEarthOpened = false;
 
         mSDKCallback = new MetaioSDKCallbackHandler();
         mVisualSearchCallback = new VisualSearchCallbackHandler();
@@ -374,6 +375,7 @@ public class Template extends ARViewActivity {
     }
 
 
+    // Currently, we will only support .png images
     protected boolean is_file_type_image(String content_filename) {
        String file_extension = content_filename.substring(content_filename.indexOf('.'));
        if (file_extension.equalsIgnoreCase(".png")) {
@@ -397,15 +399,16 @@ public class Template extends ARViewActivity {
     /*
     Used to reinitialize tracking.
      */
-    public void run_tracking_setup(){
-
+    public void run_tracking_setup()throws Exception{
+        setupTracking();
+        metaioSDK.startCamera();  // Need to test this
     }
 
     /*
     Used to stop current tracking processes.
      */
     public void terminate_tracking_processes(){
-
+        metaioSDK.stopCamera(); // Need to test this
     }
 
     /*
@@ -445,9 +448,18 @@ public class Template extends ARViewActivity {
      */
     final class MetaioSDKCallbackHandler extends IMetaioSDKCallback {
 
+
+        /**
+         * Fires whenever a tracking event occurs in the MetaioSDK.  Events include: tracking marker
+         * entering scene, tracking marker leaving scene, ...
+         *
+         * @param trackingValues
+         */
         @Override
         public void onTrackingEvent(TrackingValuesVector trackingValues) {
-            System.out.println("----Tracking Event Occurred----");
+
+            if(DEBUG_OUT)
+                System.out.println("----Tracking Event Occurred----");
 
             // First, Update all tracking statuses from trackingValues vector
             for (int tracking_values_index = 0; tracking_values_index < trackingValues.size(); tracking_values_index++) {
@@ -461,9 +473,11 @@ public class Template extends ARViewActivity {
                 tracking_markers[marker_id - 1].tracking_quality = values.getQuality();
 
                 //Logging:
-                System.out.println("Tracking marker: " + marker_id);
-                System.out.println("Tracking state: " + values.isTrackingState());
-                System.out.println("Tracking quality: " + values.getQuality());
+                if(DEBUG_OUT) {
+                    System.out.println("Tracking marker: " + marker_id);
+                    System.out.println("Tracking state: " + values.isTrackingState());
+                    System.out.println("Tracking quality: " + values.getQuality());
+                }
             }
 
             // Next, Determine the marker with the best tracking quality
@@ -486,14 +500,18 @@ public class Template extends ARViewActivity {
                 tracking_markers[best_quality_index].marker_3d_content.setVisible(true);
 
                 // Logging:
-                System.out.println("Chosen Tracking Marker: " + (best_quality_index + 1));
-                System.out.println("Chosen Marker's Tracking Quality: " + best_tracking_quality);
+                if(DEBUG_OUT) {
+                    System.out.println("Chosen Tracking Marker: " + (best_quality_index + 1));
+                    System.out.println("Chosen Marker's Tracking Quality: " + best_tracking_quality);
+                }
 
             } else {
                 // ...Do Something in the UI to show the user that there is insufficient tracking quality
-                System.out.println("Not Tracking: All tracking quality values are less than the threshold of: " + minimum_quality_threshhold);
+                if(DEBUG_OUT)
+                    System.out.println("Not Tracking: All tracking quality values are less than the threshold of: " + minimum_quality_threshhold);
             }
-            System.out.println("----End of Tracking Event----");
+            if(DEBUG_OUT)
+                System.out.println("----End of Tracking Event----");
         }
 
         @Override
