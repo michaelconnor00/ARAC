@@ -1,21 +1,15 @@
 package ca.unbc.md.arac;
 
 import java.io.File;
-import java.util.ArrayList;
 
-import android.content.res.Resources.Theme;
-import android.graphics.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
-import com.metaio.sdk.jni.EDEBUG_VISIBILITY;
-import com.metaio.sdk.jni.ETRACKING_STATE;
 import com.metaio.sdk.jni.EVISUAL_SEARCH_STATE;
 import com.metaio.sdk.jni.IGeometry;
-import com.metaio.sdk.jni.IMetaioSDKAndroid;
 import com.metaio.sdk.jni.IMetaioSDKCallback;
 import com.metaio.sdk.jni.IVisualSearchCallback;
 import com.metaio.sdk.jni.ImageStruct;
@@ -41,16 +35,20 @@ public class Template extends ARViewActivity {
     private TrackingMarker[] tracking_markers = new TrackingMarker[number_of_tracking_markers];
 
     //--- Tracking Data XML Configuration File
-    //private String tracking_configuration_filename = "TrackingData_10_Marker.xml";
-    private String tracking_configuration_filename = "TrackingData_10_Marker_Medium_Smoothing_Fuser.xml";
-    //private String tracking_configuration_filename = "TrackingData_6_Marker_Heavy_Smoothing_Fuser.xml";
-    //private String tracking_configuration_filename = "TrackingData_6_Marker_Medium_Smoothing_Fuser.xml";
+    //private String tracking_configuration_filename = "Augmented_Workspace_TrackingData_10_Marker.xml";
+    private String tracking_configuration_filename = "Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml";
+    //private String tracking_configuration_filename = "Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml";
+    //private String tracking_configuration_filename = "Square_Tool_TrackingData_6_Marker_Heavy_Smoothing_Fuser.xml";
+    //private String tracking_configuration_filename = "Square_Tool_TrackingData_6_Marker_Medium_Smoothing_Fuser.xml";
 
     //--- 3D Geometry File:
     //private String geometry_filename = "wood_block_3_holes.zip";
     //private String geometry_filename = "722_462_Big_Green.zip";
     //private String geometry_filename = "ruler_obj.zip";
     private String geometry_filename = "Starry_Night.png";
+
+    //--- The Physical Alignment Tool Currently being used:
+    private PhysicalAlignmentTool current_physical_alignment_tool;
 
 
     @Override
