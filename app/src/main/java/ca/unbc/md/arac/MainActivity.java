@@ -1,18 +1,11 @@
 package ca.unbc.md.arac;
 
-import java.io.IOException;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
-import ca.unbc.md.arac.BuildConfig;
-import ca.unbc.md.arac.R;
+
 import com.metaio.sdk.MetaioDebug;
-import com.metaio.tools.io.AssetsManager;
 
 public class MainActivity extends Activity {
 
@@ -22,6 +15,13 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+
+        // Initialize the physical alignment tool Objects (Offset and Geometries are not yet specified):
+        // TODO Move this into the onCreate in the physical alignment tool picker view
+        PhysicalAlignmentToolConfiguration toolConfiguration = new PhysicalAlignmentToolConfiguration();
+        AppGlobal.physical_alignment_tool_configuration = toolConfiguration;
+
 
         setContentView(R.layout.activity_main);
 
@@ -54,10 +54,6 @@ public class MainActivity extends Activity {
     public void launchAdjust(View view){
 
     }
-
-
-
-
 
 }
 

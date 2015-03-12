@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -90,6 +89,11 @@ public class ModelManagerActivity extends ActionBarActivity {
         {
             if (result)
             {
+                // TODO remove hardcoded stuff...Once we have the proper interfaces to specify this stuff...
+                AppGlobal.current_geometry_filename = "wood_block_3_holes.zip";
+                // Set the selected physical alignment tool
+                AppGlobal.current_physical_alignment_tool = AppGlobal.physical_alignment_tool_configuration.physical_alignment_tools.get("Augmented Workspace");
+
                 // Start AR Activity on success
                 Intent intent = new Intent(getApplicationContext(), Template.class);
                 startActivity(intent);
@@ -101,9 +105,7 @@ public class ModelManagerActivity extends ActionBarActivity {
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 toast.show();
             }
-
             finish();
         }
-
     }
 }
