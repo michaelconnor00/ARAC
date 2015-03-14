@@ -2,6 +2,7 @@ package ca.unbc.md.arac;
 
 import java.io.File;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,8 +64,12 @@ public class Template extends ARViewActivity {
         }
     }
 
-    public void launchAdjust(View view) {
-        // Load popup window??
+    public void launchCalibration(View view) {
+        Intent intent = new Intent(this, CalibrationActivity.class);
+//        EditText editText = (EditText) findViewById(R.id.edit_message);
+//        String message = editText.getText().toString();
+//        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
     public void setupTracking() throws Exception {
@@ -85,15 +90,9 @@ public class Template extends ARViewActivity {
 
         if (model_file != null) {
             PhysicalAlignmentToolConfiguration physical_alignment_tool_configuration = AppGlobal.physical_alignment_tool_configuration;
-            // Do setup based on content type (.obj or .png)
-            if (is_file_type_image(geometry_filename)) {
-                //setup_tracking_for_2d_image(model_file);
-                physical_alignment_tool_configuration.configure_alignment_tool_by_id(AppGlobal.current_physical_alignment_tool.get_tool_name(), metaioSDK, model_file, true);
-            } else {
-                //setup_tracking_for_3d_model(model_file);
-                physical_alignment_tool_configuration.configure_alignment_tool_by_id(AppGlobal.current_physical_alignment_tool.get_tool_name(), metaioSDK, model_file, false);
-            }
+            physical_alignment_tool_configuration.configure_alignment_tool_by_id(AppGlobal.current_physical_alignment_tool.get_tool_name(), metaioSDK, model_file, is_file_type_image(geometry_filename));
         }
+
     }
 
     @Override

@@ -79,7 +79,7 @@
         <activity
             android:name=".CalibrationActivity"
             android:label="@string/title_activity_calibration"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Template"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

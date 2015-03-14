@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:src="@drawable/settings"
         android:scaleType="fitCenter"
-        android:onClick="launchAdjust"
+        android:onClick="launchCalibration"
         android:contentDescription="@string/assess_logo"
         />
 

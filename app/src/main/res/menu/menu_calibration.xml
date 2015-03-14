@@ -2,6 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ca.unbc.md.arac.CalibrationActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/action_calibration" android:title="@string/action_calibration"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
