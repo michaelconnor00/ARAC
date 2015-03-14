@@ -16,13 +16,6 @@ public class MainActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
 
-
-        // Initialize the physical alignment tool Objects (Offset and Geometries are not yet specified):
-        // TODO Move this into the onCreate in the physical alignment tool picker view
-        PhysicalAlignmentToolConfiguration toolConfiguration = new PhysicalAlignmentToolConfiguration();
-        AppGlobal.physical_alignment_tool_configuration = toolConfiguration;
-
-
         setContentView(R.layout.activity_main);
 
         // Enable metaio SDK debug log messages based on build configuration

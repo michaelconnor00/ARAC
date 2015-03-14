@@ -89,9 +89,9 @@ public class ModelManagerActivity extends ActionBarActivity {
         {
             if (result)
             {
-                // TODO remove hardcoded stuff...Once we have the proper interfaces to specify this stuff...
+                // TODO remove hardcoded stuff...Once we have the proper user interfaces to specify this stuff...
+                AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolConfiguration();
                 AppGlobal.current_geometry_filename = "wood_block_3_holes.zip";
-                // Set the selected physical alignment tool
                 AppGlobal.current_physical_alignment_tool = AppGlobal.physical_alignment_tool_configuration.physical_alignment_tools.get("Augmented Workspace");
 
                 // Start AR Activity on success

@@ -28,6 +28,14 @@ public class Template extends ARViewActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSDKCallback = new MetaioSDKCallbackHandler();
+        mVisualSearchCallback = new VisualSearchCallbackHandler();
+
+        if (metaioSDK != null) {
+            metaioSDK.registerVisualSearchCallback(mVisualSearchCallback);
+        }
+
     }
 
     @Override
@@ -49,14 +57,6 @@ public class Template extends ARViewActivity {
     protected void loadContents() {
         try {
             setupTracking();
-
-            mSDKCallback = new MetaioSDKCallbackHandler();
-            mVisualSearchCallback = new VisualSearchCallbackHandler();
-
-            if (metaioSDK != null) {
-                metaioSDK.registerVisualSearchCallback(mVisualSearchCallback);
-            }
-
         } catch (Exception e) {
             MetaioDebug.log(Log.ERROR, "Failed to load content: " + e);
             System.exit(0);
@@ -70,7 +70,7 @@ public class Template extends ARViewActivity {
     public void setupTracking() throws Exception {
 
         // Retrieve the tracking xmk configuration filename for the selected tool: // TODO make tracking file index variable
-        String tracking_configuration_filename = AppGlobal.current_physical_alignment_tool.tool_tracking_xml_filenames.get(1);
+        String tracking_configuration_filename = AppGlobal.current_physical_alignment_tool.tool_tracking_xml_filenames.get(0);
 
         // Getting a file path for tracking configuration XML file:
         final File trackingConfigFile = AssetsManager.getAssetPathAsFile(getApplicationContext(), tracking_configuration_filename);
@@ -79,12 +79,8 @@ public class Template extends ARViewActivity {
         boolean result = metaioSDK.setTrackingConfiguration(trackingConfigFile);
         MetaioDebug.log("Tracking data loaded: " + result);
 
-        // Getting a file path for a 3D geometry
-        /* TODO : loading geometries... Look at this more closely...
-        WHEN A GEOMETRY FILE IS SELECTED IN THE LIST VIEW, WE NEED TO INITILAIZE THE SELECTED TOOL
-        WITH THE GEOMETRY!
-         */
-        String geometry_filename = AppGlobal.current_geometry_filename;
+
+       String geometry_filename = AppGlobal.current_geometry_filename;
        final File model_file = AssetsManager.getAssetPathAsFile(getApplicationContext(), geometry_filename);
 
         if (model_file != null) {
@@ -124,7 +120,7 @@ public class Template extends ARViewActivity {
 
 
     //////////////////// START Public Interface ////////////////////////////////////////////////////
-
+/*
     public void run_tracking_setup()throws Exception{
         setupTracking();
         metaioSDK.startCamera(); //TODO  Need to test this
@@ -133,6 +129,7 @@ public class Template extends ARViewActivity {
     public void terminate_tracking_processes(){
         metaioSDK.stopCamera(); //TODO Need to test this
     }
+    */
 
     //////////////////// END Public Interface //////////////////////////////////////////////////////
 
@@ -164,11 +161,9 @@ public class Template extends ARViewActivity {
                 final TrackingValues values = trackingValues.get(tracking_values_index);
                 int marker_id = trackingValues.get(tracking_values_index).getCoordinateSystemID(); // ID's start from 1.
 
-
                 // Update tracking data based on the TrackingValuesVector attributes
                 AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id -1).tracking_state = values.isTrackingState();
                 AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id -1).tracking_quality = values.getQuality();
-
 
                 //Logging:
                 if(DEBUG_OUT) {
