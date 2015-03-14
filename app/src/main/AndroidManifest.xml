@@ -50,6 +50,7 @@
         android:icon="@mipmap/md_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".MainActivity"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
@@ -107,5 +108,3 @@
     </application>
 
 </manifest>
-<!-- Preamble: android:installLocation="preferExternal" -->
-<!-- TEmplate: android:label="@string/title_activity_template" -->

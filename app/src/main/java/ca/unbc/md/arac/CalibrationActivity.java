@@ -1,14 +1,14 @@
 package ca.unbc.md.arac;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class CalibrationActivity extends ActionBarActivity {
+public class CalibrationActivity extends Activity {
 
     /*
     PERSISTENT STORAGE FORMAT:

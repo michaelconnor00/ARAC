@@ -6,6 +6,6 @@
         android:id="@+id/action_fileman"
         android:title="@string/action_settings"
         android:orderInCategory="100"
-        app:showAsAction="never"
+        android:showAsAction="never"
         />
 </menu>
