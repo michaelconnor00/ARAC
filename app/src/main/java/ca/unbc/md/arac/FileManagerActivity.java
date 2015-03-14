@@ -125,6 +125,10 @@ public class FileManagerActivity extends ListActivity {
 
 
     public void launchTemplate(){
+        // TODO remove hardcoded stuff...Once we have the proper user interfaces to specify this stuff...
+        AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolConfiguration();
+        AppGlobal.current_geometry_filename = "wood_block_3_holes.zip";
+        AppGlobal.current_physical_alignment_tool = AppGlobal.physical_alignment_tool_configuration.physical_alignment_tools.get("Augmented Workspace");
         // Start AR Activity on success
         Intent intent = new Intent(getApplicationContext(), Template.class);
         startActivity(intent);
