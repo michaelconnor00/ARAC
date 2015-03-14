@@ -1,18 +1,11 @@
 package ca.unbc.md.arac;
 
-import java.io.IOException;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
-import ca.unbc.md.arac.BuildConfig;
-import ca.unbc.md.arac.R;
+
 import com.metaio.sdk.MetaioDebug;
-import com.metaio.tools.io.AssetsManager;
 
 public class MainActivity extends Activity {
 
@@ -34,7 +27,7 @@ public class MainActivity extends Activity {
      * Function to transition to Model Manager
      */
     public void launchModelManager(View view){
-        Intent intent = new Intent(this, ModelManagerActivity.class);
+        Intent intent = new Intent(this, FileManagerActivity.class);
 //        EditText editText = (EditText) findViewById(R.id.edit_message);
 //        String message = editText.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);

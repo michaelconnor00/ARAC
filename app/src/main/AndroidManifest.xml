@@ -57,18 +57,23 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Template"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.unbc.md.arac.FileManagerActivity"
+                />
         </activity>
+
         <activity
-            android:name=".ModelManagerActivity"
-            android:label="@string/title_activity_model_manager"
+            android:name=".FileManagerActivity"
+            android:label="@string/title_activity_file_manager"
             android:parentActivityName=".MainActivity"
             >
             <meta-data
@@ -76,6 +81,7 @@
                 android:value="ca.unbc.md.arac.MainActivity"
                 />
         </activity>
+
         <activity
             android:name=".CalibrationActivity"
             android:label="@string/title_activity_calibration"
@@ -86,6 +92,7 @@
                 android:value="ca.unbc.md.arac.MainActivity"
                 />
         </activity>
+
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
@@ -96,6 +103,7 @@
                 android:value="ca.unbc.md.arac.MainActivity"
                 />
         </activity>
+
     </application>
 
 </manifest>
