@@ -1,11 +1,17 @@
 package ca.unbc.md.arac;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.metaio.sdk.MetaioDebug;
+import com.metaio.tools.io.AssetsManager;
+
+import java.io.IOException;
 
 public class MainActivity extends Activity {
 
@@ -15,6 +21,20 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        try
+        {
+            // Extract all assets and overwrite existing files if debug build
+            AssetsManager.extractAllAssets(getApplicationContext(), BuildConfig.DEBUG);
+        }
+        catch (IOException e)
+        {
+            MetaioDebug.log(Log.ERROR, "Error extracting assets: " + e.getMessage());
+            MetaioDebug.printStackTrace(Log.ERROR, e);
+        }
+
+        SharedPreferences preferences = this.getSharedPreferences("ca.unbc.md.arac", Context.MODE_PRIVATE);
+        AppGlobal.shared_preferences = preferences;
 
         setContentView(R.layout.activity_main);
 

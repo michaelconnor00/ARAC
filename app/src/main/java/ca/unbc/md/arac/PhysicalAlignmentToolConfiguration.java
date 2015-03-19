@@ -1,5 +1,6 @@
 package ca.unbc.md.arac;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.metaio.sdk.MetaioDebug;
@@ -35,6 +36,9 @@ public class PhysicalAlignmentToolConfiguration {
 
         // Initialize all physical tools:
         try {
+            // TODO only set shred prefs to default on very first app launch
+            setPhysicalToolSharedPreferencesToDefault();
+
             initialize_square_edge_tool();
             initialize_augmented_workspace_tool();
             initialize_A4_drawing_canvas_tool();
@@ -54,13 +58,13 @@ public class PhysicalAlignmentToolConfiguration {
     private void initialize_square_edge_tool() throws Exception{
 
         // This tool unique ID:
-        String tool_id = "Square Edge";
+        String tool_id = "Square_Edge";
 
         // Specify compatible tracking.xml configuration files:
         ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
-        tracking_configuration_filenames.add("tool_config/Square_Tool_TrackingData_6_Marker.xml");
-        tracking_configuration_filenames.add("tool_config/Square_Tool_TrackingData_6_Marker_Medium_Smoothing_Fuser.xml");
-        tracking_configuration_filenames.add("tool_config/Square_Tool_TrackingData_6_Marker_Heavy_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("Square_Tool_TrackingData_6_Marker.xml");
+        tracking_configuration_filenames.add("Square_Tool_TrackingData_6_Marker_Medium_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("Square_Tool_TrackingData_6_Marker_Heavy_Smoothing_Fuser.xml");
 
         // Initialize the tool:
         PhysicalAlignmentTool square_edge_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
@@ -73,13 +77,13 @@ public class PhysicalAlignmentToolConfiguration {
     private void initialize_augmented_workspace_tool(){
 
         // This tool unique ID:
-        String tool_id = "Augmented Workspace";
+        String tool_id = "Augmented_Workspace";
 
         // Specify compatible tracking.xml configuration files:
         ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
-        tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker.xml");
-        tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
-        tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker.xml");
+        tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
 
         // Initialize the tool:
         PhysicalAlignmentTool augmented_workspace_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
@@ -93,14 +97,14 @@ public class PhysicalAlignmentToolConfiguration {
     private void initialize_A4_drawing_canvas_tool(){
 
         // This tool unique ID:
-        String tool_id = "A4 Drawing Canvas";
+        String tool_id = "A4_Drawing_Canvas";
 
         // Specify compatible tracking.xml configuration files:
         // TODO add tracking config files
         ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
-        //tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker.xml");
-        //tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
-        //tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
+        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker.xml");
+        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
+        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
 
         // Initialize the tool:
         PhysicalAlignmentTool augmented_workspace_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
@@ -117,17 +121,18 @@ public class PhysicalAlignmentToolConfiguration {
 
 
 
+
     /****** TOOL CONFIGURATIONS - Set the tool Geometries, Offsets, Etc...  *******/
 
     public void configure_alignment_tool_by_id(String tool_id, IMetaioSDKAndroid metaioSDK, File model_file, boolean isGeometryAnImage) throws Exception{
         switch(tool_id){
-            case "Square Edge":
+            case "Square_Edge":
                 configure_square_edge_tool(metaioSDK, model_file, isGeometryAnImage);
                 break;
-            case "Augmented Workspace":
+            case "Augmented_Workspace":
                 configure_augmented_workspace_tool(metaioSDK, model_file, isGeometryAnImage);
                 break;
-            case "A4 Drawing Canvas":
+            case "A4_Drawing_Canvas":
                 configure_A4_drawing_canvas_tool(metaioSDK, model_file, isGeometryAnImage);
                 break;
         }
@@ -152,8 +157,8 @@ public class PhysicalAlignmentToolConfiguration {
                 geometry.setCoordinateSystemID(i);
                 geometry.setName("" + i);
                 geometry.setVisible(false);
-                geometry.setTransparency(global_geometry_transparency);
-                geometry.setScale(global_geometry_scale);
+                geometry.setTransparency((float)getGlobalTransparency());
+                geometry.setScale((float) getGlobalScale());
 
                 // Set the translation offsets and rotation for each specific marker ID.
                 Rotation rotation;
@@ -167,40 +172,8 @@ public class PhysicalAlignmentToolConfiguration {
                 }
 
 
-
-                // Offset Configuration for square tool:
-                switch (i) {
-                    case 1:
-                        marker_position = new TrackingMarkerPosition(30, 17, 1,
-                                rotation);
-                        break;
-                    case 2:
-                        marker_position = new TrackingMarkerPosition(30, -172,
-                                1, rotation);
-                        break;
-                    case 3:
-                        marker_position = new TrackingMarkerPosition(30, -365,
-                                1, rotation);
-                        break;
-                    case 4:
-                        marker_position = new TrackingMarkerPosition(30, -548,
-                                1, rotation);
-                        break;
-                    case 5:
-                        marker_position = new TrackingMarkerPosition(-153, 19,
-                                1, rotation);
-                        break;
-                    case 6:
-                        marker_position = new TrackingMarkerPosition(-335, 18,
-                                1, rotation);
-                        break;
-                    default:
-                        throw new Exception(
-                                "A Marker ID's position offset was not specified in setupTracking()");
-                }
-
-                geometry.setTranslation(new Vector3d(marker_position.x_offset, marker_position.y_offset, marker_position.z_offset));
-                geometry.setRotation(marker_position.rotation);
+                geometry.setTranslation(new Vector3d(getPhysicalToolAttribute("Square_Edge", i ,"x"), getPhysicalToolAttribute("Square_Edge", i ,"y"), getPhysicalToolAttribute("Square_Edge" ,"z")));
+                geometry.setRotation(rotation);
 
                 tracking_marker = new TrackingMarker(i, geometry);
                 tracking_markers.add(tracking_marker);
@@ -210,7 +183,7 @@ public class PhysicalAlignmentToolConfiguration {
         }
 
         // Tool was previously initialized, so just update it with the configuration:
-        PhysicalAlignmentTool square_edge_tool = physical_alignment_tools.get("Square Edge");
+        PhysicalAlignmentTool square_edge_tool = physical_alignment_tools.get("Square_Edge");
         square_edge_tool.tool_tracking_markers = tracking_markers;
     }
 
@@ -236,8 +209,8 @@ public class PhysicalAlignmentToolConfiguration {
                 geometry.setCoordinateSystemID(i);
                 geometry.setName("" + i);
                 geometry.setVisible(false);
-                geometry.setTransparency(global_geometry_transparency);
-                geometry.setScale(global_geometry_scale);
+                geometry.setTransparency((float)getGlobalTransparency());
+                geometry.setScale((float)getGlobalScale());
 
 
                 // Set the translation offsets and rotation for each specific marker ID.
@@ -250,54 +223,8 @@ public class PhysicalAlignmentToolConfiguration {
                             (float) Math.PI / 2, 0.0f, 0.0f));
                 }
 
-                // Offset configuration for workbench space
-                switch (i) {
-                    case 1:
-                        marker_position = new TrackingMarkerPosition(62, 62, 20,
-                                rotation);
-                        break;
-                    case 2:
-                        marker_position = new TrackingMarkerPosition(62, -203,
-                                20, rotation);
-                        break;
-                    case 3:
-                        marker_position = new TrackingMarkerPosition(62, -467,
-                                20, rotation);
-                        break;
-                    case 4:
-                        marker_position = new TrackingMarkerPosition(-202, -467,
-                                20, rotation);
-                        break;
-                    case 5:
-                        marker_position = new TrackingMarkerPosition(-484, -468,
-                                20, rotation);
-                        break;
-                    case 6:
-                        marker_position = new TrackingMarkerPosition(-773, -469,
-                                20, rotation);
-                        break;
-                    case 7:
-                        marker_position = new TrackingMarkerPosition(-773, -192,
-                                20, rotation);
-                        break;
-                    case 8:
-                        marker_position = new TrackingMarkerPosition(-773, 62,
-                                20, rotation);
-                        break;
-                    case 9:
-                        marker_position = new TrackingMarkerPosition(-485, 62,
-                                20, rotation);
-                        break;
-                    case 10:
-                        marker_position = new TrackingMarkerPosition(-202, 62,
-                                20, rotation);
-                        break;
-                    default:
-                        throw new Exception("A Marker ID's position offset was not specified in setupTracking()");
-                }
-
-                geometry.setTranslation(new Vector3d(marker_position.x_offset, marker_position.y_offset, marker_position.z_offset));
-                geometry.setRotation(marker_position.rotation);
+                geometry.setTranslation(new Vector3d(getPhysicalToolAttribute("Augmented_Workspace", i ,"x"), getPhysicalToolAttribute("Augmented_Workspace", i ,"y"), getPhysicalToolAttribute("Augmented_Workspace" ,"z")));
+                geometry.setRotation(rotation);
 
                 tracking_marker = new TrackingMarker(i, geometry);
                 tracking_markers.add(tracking_marker);
@@ -307,9 +234,10 @@ public class PhysicalAlignmentToolConfiguration {
         }
 
         // Tool was previously initialized, so just update it with the configuration:
-        PhysicalAlignmentTool workspace_tool = physical_alignment_tools.get("Augmented Workspace");
+        PhysicalAlignmentTool workspace_tool = physical_alignment_tools.get("Augmented_Workspace");
         workspace_tool.tool_tracking_markers = tracking_markers;
     }
+
 
     public void configure_A4_drawing_canvas_tool(IMetaioSDKAndroid metaioSDK, File model_file, boolean isGeometryAnImage){
 
@@ -405,6 +333,121 @@ public class PhysicalAlignmentToolConfiguration {
         PhysicalAlignmentTool workspace_tool = physical_alignment_tools.get("Augmented Workspace");
         workspace_tool.tool_tracking_markers = tracking_markers;
         */
+
+    }
+
+
+
+
+
+
+    /****** SHARED PREFERENCES  - Persistent Storage of tool configurations *******/
+
+    /*
+    PERSISTENT STORAGE FORMAT:
+
+    KEY: <Physical_Tool_Name>_<Marker_ID>_<Attribute_ID>
+    Value: The value of the attribute
+
+    Attribute_ID's are: {x, y, r}
+
+    EXAMPLE: Augmented_Workspace_1_x = -5
+
+
+    Additional Keys:
+
+    <Physical_Tool_Name>_z
+    Global_Scale
+    Global_Transparency
+
+     */
+
+    public void setPhysicalToolMarkerAttribute(String physical_tool_id, int marker_id, String attribute_id, String value){
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+        preferences.edit().putString(physical_tool_id + "_" + marker_id + "_" + attribute_id, value).apply();
+    }
+
+    public float getPhysicalToolAttribute(String physical_tool_id, int marker_id, String attribute_id){
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+        float return_value = Float.parseFloat(preferences.getString(physical_tool_id + "_" + marker_id + "_" + attribute_id, "0"));
+        return return_value;
+        // TODO Do some error handling if the default value of 0 is returned...
+    }
+
+    public float getPhysicalToolAttribute(String physical_tool_id, String attribute_id){
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+        float return_value =  Float.parseFloat(preferences.getString(physical_tool_id + "_" + attribute_id, "0"));
+        return return_value;
+        // TODO Do some error handling if the default value of 0 is returned...
+    }
+
+    public double getGlobalScale(){
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+        return Double.parseDouble(preferences.getString("Global_Scale", "1"));
+    }
+
+    public double getGlobalTransparency(){
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+        return Double.parseDouble(preferences.getString("Global_Transparency", "0.5"));
+    }
+
+
+
+
+    public void setPhysicalToolSharedPreferencesToDefault(){
+
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+
+        // Global Attributes:
+        preferences.edit().putString("Global_Scale","1").apply();
+        preferences.edit().putString("Global_Transparency","0.5").apply();
+
+        // Square Tool:
+        preferences.edit().putString("Square_Tool_1_x", "30").apply();
+        preferences.edit().putString("Square_Tool_2_x", "30").apply();
+        preferences.edit().putString("Square_Tool_3_x", "30").apply();
+        preferences.edit().putString("Square_Tool_4_x", "30").apply();
+        preferences.edit().putString("Square_Tool_5_x", "-153").apply();
+        preferences.edit().putString("Square_Tool_6_x", "-335").apply();
+
+        preferences.edit().putString("Square_Tool_1_y", "17").apply();
+        preferences.edit().putString("Square_Tool_2_y", "-172").apply();
+        preferences.edit().putString("Square_Tool_3_y", "-365").apply();
+        preferences.edit().putString("Square_Tool_4_y", "-548").apply();
+        preferences.edit().putString("Square_Tool_5_y", "19").apply();
+        preferences.edit().putString("Square_Tool_6_y", "18").apply();
+
+        preferences.edit().putString("Square_Tool_z", "1").apply();
+
+
+
+        // Augmented_Workspace:
+        preferences.edit().putString("Augmented_Workspace_1_x", "62").apply();
+        preferences.edit().putString("Augmented_Workspace_2_x", "62").apply();
+        preferences.edit().putString("Augmented_Workspace_3_x", "62").apply();
+        preferences.edit().putString("Augmented_Workspace_4_x", "-202").apply();
+        preferences.edit().putString("Augmented_Workspace_5_x", "-484").apply();
+        preferences.edit().putString("Augmented_Workspace_6_x", "-773").apply();
+        preferences.edit().putString("Augmented_Workspace_7_x", "-773").apply();
+        preferences.edit().putString("Augmented_Workspace_8_x", "-773").apply();
+        preferences.edit().putString("Augmented_Workspace_9_x", "-485").apply();
+        preferences.edit().putString("Augmented_Workspace_10_x", "-202").apply();
+
+        preferences.edit().putString("Augmented_Workspace_1_y", "62").apply();
+        preferences.edit().putString("Augmented_Workspace_2_y", "-203").apply();
+        preferences.edit().putString("Augmented_Workspace_3_y", "-467").apply();
+        preferences.edit().putString("Augmented_Workspace_4_y", "-467").apply();
+        preferences.edit().putString("Augmented_Workspace_5_y", "-468").apply();
+        preferences.edit().putString("Augmented_Workspace_6_y", "-469").apply();
+        preferences.edit().putString("Augmented_Workspace_7_y", "-192").apply();
+        preferences.edit().putString("Augmented_Workspace_8_y", "62").apply();
+        preferences.edit().putString("Augmented_Workspace_9_y", "62").apply();
+        preferences.edit().putString("Augmented_Workspace_10_y", "62").apply();
+
+        preferences.edit().putString("Augmented_Workspace_z", "1").apply();
+
+
+        // A4_Drawing_Canvas:
 
     }
 
