@@ -35,7 +35,7 @@ public class FileManagerActivity extends ListActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model_manager);
-        getActionBar().show();
+//        getActionBar().show();
 
 //        // extract all the assets
 //        mTask = new AssetsExtracter();
@@ -52,10 +52,7 @@ public class FileManagerActivity extends ListActivity {
             MetaioDebug.printStackTrace(Log.ERROR, e);
         }
 
-//        final ListView listview = (ListView) findViewById(R.id.list);
-
-
-        String [] values = listFiles("");
+        String [] values = listFiles("models");
 
         list = new ArrayList<String>();
 

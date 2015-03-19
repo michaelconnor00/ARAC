@@ -58,9 +58,9 @@ public class PhysicalAlignmentToolConfiguration {
 
         // Specify compatible tracking.xml configuration files:
         ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
-        tracking_configuration_filenames.add("Square_Tool_TrackingData_6_Marker.xml");
-        tracking_configuration_filenames.add("Square_Tool_TrackingData_6_Marker_Medium_Smoothing_Fuser.xml");
-        tracking_configuration_filenames.add("Square_Tool_TrackingData_6_Marker_Heavy_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("tool_config/Square_Tool_TrackingData_6_Marker.xml");
+        tracking_configuration_filenames.add("tool_config/Square_Tool_TrackingData_6_Marker_Medium_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("tool_config/Square_Tool_TrackingData_6_Marker_Heavy_Smoothing_Fuser.xml");
 
         // Initialize the tool:
         PhysicalAlignmentTool square_edge_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
@@ -77,9 +77,9 @@ public class PhysicalAlignmentToolConfiguration {
 
         // Specify compatible tracking.xml configuration files:
         ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
-        tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker.xml");
-        tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
-        tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker.xml");
+        tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
 
         // Initialize the tool:
         PhysicalAlignmentTool augmented_workspace_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
@@ -98,9 +98,9 @@ public class PhysicalAlignmentToolConfiguration {
         // Specify compatible tracking.xml configuration files:
         // TODO add tracking config files
         ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
-        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker.xml");
-        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
-        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
+        //tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker.xml");
+        //tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
+        //tracking_configuration_filenames.add("tool_config/Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
 
         // Initialize the tool:
         PhysicalAlignmentTool augmented_workspace_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);

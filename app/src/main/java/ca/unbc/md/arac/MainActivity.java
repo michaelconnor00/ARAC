@@ -44,8 +44,14 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void launchAdjust(View view){
+    public void launchToolsMenu(View view){
+        Intent intent = new Intent(this, ToolsMenuActivity.class);
+        startActivity(intent);
+    }
 
+    public void launchHelp(View view){
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
     }
 
 }

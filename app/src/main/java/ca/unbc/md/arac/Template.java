@@ -80,6 +80,8 @@ public class Template extends ARViewActivity {
         // Getting a file path for tracking configuration XML file:
         final File trackingConfigFile = AssetsManager.getAssetPathAsFile(getApplicationContext(), tracking_configuration_filename);
 
+        MetaioDebug.log("------------------------TRACKING CONFIG: " + tracking_configuration_filename);
+
         // Assigning tracking configuration
         boolean result = metaioSDK.setTrackingConfiguration(trackingConfigFile);
         MetaioDebug.log("Tracking data loaded: " + result);
