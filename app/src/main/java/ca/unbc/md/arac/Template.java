@@ -77,7 +77,7 @@ public class Template extends ARViewActivity {
     public void setupTracking() throws Exception {
 
         // Retrieve the tracking xmk configuration filename for the selected tool: // TODO make tracking file index variable
-        String tracking_configuration_filename = AppGlobal.current_physical_alignment_tool.tool_tracking_xml_filenames.get(0);
+        String tracking_configuration_filename = AppGlobal.current_physical_alignment_tool.tool_tracking_xml_filenames.get(1);
 
         // Getting a file path for tracking configuration XML file:
         final File trackingConfigFile = AssetsManager.getAssetPathAsFile(getApplicationContext(), tracking_configuration_filename);
@@ -94,7 +94,7 @@ public class Template extends ARViewActivity {
 
         if (model_file != null) {
             PhysicalAlignmentToolConfiguration physical_alignment_tool_configuration = AppGlobal.physical_alignment_tool_configuration;
-            physical_alignment_tool_configuration.configure_alignment_tool_by_id(AppGlobal.current_physical_alignment_tool.get_tool_name(), metaioSDK, model_file, is_file_type_image(geometry_filename));
+            physical_alignment_tool_configuration.configure_alignment_tool_by_id(AppGlobal.current_physical_alignment_tool.get_tool_id(), metaioSDK, model_file, is_file_type_image(geometry_filename));
         }
 
     }

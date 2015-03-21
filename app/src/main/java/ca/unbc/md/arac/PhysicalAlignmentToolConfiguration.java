@@ -37,7 +37,10 @@ public class PhysicalAlignmentToolConfiguration {
         // Initialize all physical tools:
         try {
             // TODO only set shred prefs to default on very first app launch
-            setPhysicalToolSharedPreferencesToDefault();
+            if(!isSharedPreferencesInitialized()){
+                setPhysicalToolSharedPreferencesToDefault();
+            }
+
 
             initialize_square_edge_tool();
             initialize_augmented_workspace_tool();
@@ -392,6 +395,17 @@ public class PhysicalAlignmentToolConfiguration {
         return Double.parseDouble(preferences.getString("Global_Transparency", "0.5"));
     }
 
+    public void setGlobalScale(float value){
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+        preferences.edit().putString("Global_Scale", String.valueOf(value)).apply();
+
+    }
+
+    public void setGlobalTransparency(float value){
+        SharedPreferences preferences = AppGlobal.shared_preferences;
+        preferences.edit().putString("Global_Transparency",String.valueOf(value)).apply();
+    }
+
 
 
 
@@ -449,8 +463,22 @@ public class PhysicalAlignmentToolConfiguration {
 
 
         // A4_Drawing_Canvas:
-
+        // TODO specify default values and configure this tool (A4_Drawing_Canvas)...
     }
 
 
+   private boolean isSharedPreferencesInitialized(){
+       SharedPreferences preferences = AppGlobal.shared_preferences;
+
+       // TODO create a dedicated value in shred prefs, instead of using transparency value.
+
+       // Set the default value to -99.9.
+       double initialization_test_result = Double.parseDouble(preferences.getString("Global_Transparency", "-99.9"));
+
+       // If the default value is returned, then the shared prefs have not been initialized yet.
+       if(initialization_test_result == -99.0){
+           return false;
+       }
+       return true;
+    }
 }
