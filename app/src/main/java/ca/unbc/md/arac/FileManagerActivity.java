@@ -41,16 +41,7 @@ public class FileManagerActivity extends ListActivity {
 //        mTask = new AssetsExtracter();
 //        mTask.execute(0);
 
-        try
-        {
-            // Extract all assets and overwrite existing files if debug build
-            AssetsManager.extractAllAssets(getApplicationContext(), BuildConfig.DEBUG);
-        }
-        catch (IOException e)
-        {
-            MetaioDebug.log(Log.ERROR, "Error extracting assets: " + e.getMessage());
-            MetaioDebug.printStackTrace(Log.ERROR, e);
-        }
+
 
         String [] values = listFiles("models");
 
@@ -124,9 +115,6 @@ public class FileManagerActivity extends ListActivity {
 
 
     public void launchTemplate(){
-        // TODO remove hardcoded stuff...Once we have the proper user interfaces to specify this stuff...
-        AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolConfiguration();
-        AppGlobal.current_physical_alignment_tool = AppGlobal.physical_alignment_tool_configuration.physical_alignment_tools.get("Augmented Workspace");
         // Start AR Activity on success
         Intent intent = new Intent(getApplicationContext(), Template.class);
         startActivity(intent);

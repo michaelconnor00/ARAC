@@ -11,4 +11,154 @@
     >
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Global Settings:"
+        android:id="@+id/global_settings_textView"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Z:"
+            android:id="@+id/z_offset_textview"
+            android:textSize="22sp"
+            android:singleLine="true" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/z_offset_numberPicker"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="S:"
+            android:id="@+id/scale_textView"
+            android:textSize="22sp"
+            android:singleLine="true" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scale_numberPicker" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="T:"
+            android:id="@+id/transparency_textView"
+            android:textSize="22sp"
+            android:singleLine="true" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/transparency_numberPicker" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+
+
+
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+        <!--android:text="Marker ID:"-->
+        <!--android:id="@+id/marker_id_textView"-->
+        <!--android:textSize="20sp" />-->
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:id="@+id/marker_ID_spinner"
+            android:spinnerMode="dropdown" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Marker Settings:"
+            android:id="@+id/Marker_Offsets_Title_textView"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="X:"
+            android:id="@+id/x_offset_textView"
+            android:textSize="22sp" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/x_offset_numberPicker"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Y:"
+            android:id="@+id/y_offset_textView"
+            android:textSize="22sp" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/y_offset_numberPicker" >
+
+        </NumberPicker>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="51dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="R:"
+            android:id="@+id/rotation_offset_textView"
+            android:textSize="22sp" />
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rotation_offset_numberPicker" >
+
+        </NumberPicker>
+
+    </LinearLayout>
+
+
+
 </LinearLayout>
