@@ -2,8 +2,6 @@ package ca.unbc.md.arac;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -85,7 +83,7 @@ public class CalibrationActivity extends Activity {
     private void initializeTextFieldEventHandlers(){
 
         // Get the tool manager, and currently selected tool.
-        final PhysicalAlignmentToolConfiguration tool_manager = AppGlobal.physical_alignment_tool_configuration;
+        final PhysicalAlignmentToolManager tool_manager = AppGlobal.physical_alignment_tool_configuration;
         final PhysicalAlignmentTool current_tool = AppGlobal.current_physical_alignment_tool;
 
         Spinner spinner = (Spinner) findViewById(R.id.marker_ID_spinner);
@@ -161,7 +159,7 @@ public class CalibrationActivity extends Activity {
         int marker_id = Integer.parseInt((String)spinner.getSelectedItem());
 
         // Get the tool manager, and currently selected tool.
-        PhysicalAlignmentToolConfiguration tool_manager = AppGlobal.physical_alignment_tool_configuration;
+        PhysicalAlignmentToolManager tool_manager = AppGlobal.physical_alignment_tool_configuration;
         PhysicalAlignmentTool current_tool = AppGlobal.current_physical_alignment_tool;
 
         // Get the references to text fields form the layout:

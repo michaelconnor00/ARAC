@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by Dev on 3/10/2015.
  *
  */
-public class PhysicalAlignmentToolConfiguration {
+public class PhysicalAlignmentToolManager {
 
 
     // Maintains a list of all the specified alignment tools:
@@ -32,7 +32,7 @@ public class PhysicalAlignmentToolConfiguration {
 //    float global_geometry_scale = 1.0f;
 
 
-    public PhysicalAlignmentToolConfiguration(){
+    public PhysicalAlignmentToolManager(){
 
         // Initialize all physical tools:
         try {
@@ -403,7 +403,7 @@ public class PhysicalAlignmentToolConfiguration {
 
     public void setGlobalTransparency(float value){
         SharedPreferences preferences = AppGlobal.shared_preferences;
-        preferences.edit().putString("Global_Transparency",String.valueOf(value)).apply();
+        preferences.edit().putString("Global_Transparency", String.valueOf(value)).apply();
     }
 
 

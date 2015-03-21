@@ -4,10 +4,8 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +14,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.metaio.sdk.MetaioDebug;
-import com.metaio.tools.io.AssetsManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -116,7 +113,7 @@ public class FileManagerActivity extends ListActivity {
 
     public void launchTemplate(){
         // Start AR Activity on success
-        Intent intent = new Intent(getApplicationContext(), Template.class);
+        Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
         startActivity(intent);
     }
 
