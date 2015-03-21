@@ -63,7 +63,7 @@ public class ToolsMenuActivity extends ListActivity {
         String item = (String) getListAdapter().getItem(position);
         AppGlobal.current_physical_alignment_tool =
                 AppGlobal.physical_alignment_tool_configuration.physical_alignment_tools.get(item);
-        AppGlobal.current_geometry_filename = "Starry_Night.png";
+
         launchTemplate();
     }
 

@@ -26,6 +26,8 @@ public class Template extends ARViewActivity {
     private MetaioSDKCallbackHandler mSDKCallback;
     private VisualSearchCallbackHandler mVisualSearchCallback;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

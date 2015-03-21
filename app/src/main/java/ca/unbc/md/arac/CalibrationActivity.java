@@ -1,24 +1,26 @@
 package ca.unbc.md.arac;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 
 public class CalibrationActivity extends Activity {
 
 
+    private ArrayList<String> marker_id_list = null;
+    private ArrayAdapter<String> marker_id_spinner_adapter = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
+        populateMarkerSelectionSpinner();
     }
 
 
@@ -36,21 +38,21 @@ public class CalibrationActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void populateMarkerSelectionSpinner(){
-        /*
-        ArrayAdapter<CharSequence> array_adapter =
-                new ArrayAdapter <CharSequence> (this, android.R.layout.simple_spinner_item );
-        array_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner marker_id_spinner = (Spinner) findViewById(R.id.marker_ID_spinner);
-        marker_id_spinner.setAdapter(array_adapter);
+    public void populateMarkerSelectionSpinner(){
+
+        marker_id_list = new ArrayList<String>();
 
         for(int i = 0; i < AppGlobal.current_physical_alignment_tool.tool_tracking_markers.size(); i++){
-            array_adapter.add(Integer.toString(AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i).marker_ID));
+            marker_id_list.add(Integer.toString(AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i).marker_ID));
         }
 
-        marker_id_spinner.setAdapter(array_adapter);
-        */
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, marker_id_list);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner spinner = (Spinner) findViewById(R.id.marker_ID_spinner);
+        spinner.setAdapter(adapter);
+
     }
 
 }

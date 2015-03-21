@@ -28,8 +28,8 @@ public class PhysicalAlignmentToolConfiguration {
 
 
     // Global Geometry Parameters:
-    float global_geometry_transparency = 0.5f;
-    float global_geometry_scale = 1.0f;
+//    float global_geometry_transparency = 0.5f;
+//    float global_geometry_scale = 1.0f;
 
 
     public PhysicalAlignmentToolConfiguration(){
@@ -170,7 +170,6 @@ public class PhysicalAlignmentToolConfiguration {
                     rotation = new Rotation(new Vector3d(
                             (float) Math.PI / 2, 0.0f, 0.0f));
                 }
-
 
                 geometry.setTranslation(new Vector3d(getPhysicalToolAttribute("Square_Edge", i ,"x"), getPhysicalToolAttribute("Square_Edge", i ,"y"), getPhysicalToolAttribute("Square_Edge" ,"z")));
                 geometry.setRotation(rotation);
@@ -381,10 +380,12 @@ public class PhysicalAlignmentToolConfiguration {
         // TODO Do some error handling if the default value of 0 is returned...
     }
 
+
     public double getGlobalScale(){
         SharedPreferences preferences = AppGlobal.shared_preferences;
         return Double.parseDouble(preferences.getString("Global_Scale", "1"));
     }
+
 
     public double getGlobalTransparency(){
         SharedPreferences preferences = AppGlobal.shared_preferences;
