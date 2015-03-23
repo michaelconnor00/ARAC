@@ -3,9 +3,14 @@ package ca.unbc.md.arac;
 import java.io.File;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
@@ -25,8 +30,7 @@ public class Template extends ARViewActivity {
 
     private MetaioSDKCallbackHandler mSDKCallback;
     private VisualSearchCallbackHandler mVisualSearchCallback;
-
-
+    private ImageButton settings_button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,23 @@ public class Template extends ARViewActivity {
             MetaioDebug.log(Log.ERROR, "Failed to load content: " + e);
             System.exit(0);
         }
+
+        // Turn settings_button visible
+        settings_button = (ImageButton) findViewById(R.id.tracking_settings_button);
+        new ToggleButtonVisible().execute();
+
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                buttons[inew][jnew].setBackgroundColor(Color.BLACK);
+            }
+        }, 5000);
+
     }
+
 
     public void launchCalibration(View view) {
         Intent intent = new Intent(this, CalibrationActivity.class);
@@ -89,8 +109,8 @@ public class Template extends ARViewActivity {
         MetaioDebug.log("Tracking data loaded: " + result);
 
 
-       String geometry_filename = AppGlobal.current_geometry_filename;
-       final File model_file = AssetsManager.getAssetPathAsFile(getApplicationContext(), geometry_filename);
+        String geometry_filename = AppGlobal.current_geometry_filename;
+        final File model_file = AssetsManager.getAssetPathAsFile(getApplicationContext(), geometry_filename);
 
         if (model_file != null) {
             PhysicalAlignmentToolConfiguration physical_alignment_tool_configuration = AppGlobal.physical_alignment_tool_configuration;
@@ -107,19 +127,18 @@ public class Template extends ARViewActivity {
 
     // Currently, we will only support .png images
     protected boolean is_file_type_image(String content_filename) {
-       String file_extension = content_filename.substring(content_filename.indexOf('.'));
-       if (file_extension.equalsIgnoreCase(".png")) {
+        String file_extension = content_filename.substring(content_filename.indexOf('.'));
+        if (file_extension.equalsIgnoreCase(".png")) {
             return true;
-       } else {
+        } else {
             return false;
-       }
+        }
     }
 
     @Override
     protected IMetaioSDKCallback getMetaioSDKCallbackHandler() {
         return mSDKCallback;
     }
-
 
 
     //////////////////// START Public Interface ////////////////////////////////////////////////////
@@ -137,8 +156,6 @@ public class Template extends ARViewActivity {
     //////////////////// END Public Interface //////////////////////////////////////////////////////
 
 
-
-
     /*
     Handles all the call back events from the Metaio SDK
      */
@@ -154,7 +171,7 @@ public class Template extends ARViewActivity {
         @Override
         public void onTrackingEvent(TrackingValuesVector trackingValues) {
 
-            if(DEBUG_OUT)
+            if (DEBUG_OUT)
                 System.out.println("----Tracking Event Occurred----");
 
             // First, Update all tracking statuses from trackingValues vector
@@ -165,11 +182,11 @@ public class Template extends ARViewActivity {
                 int marker_id = trackingValues.get(tracking_values_index).getCoordinateSystemID(); // ID's start from 1.
 
                 // Update tracking data based on the TrackingValuesVector attributes
-                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id -1).tracking_state = values.isTrackingState();
-                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id -1).tracking_quality = values.getQuality();
+                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id - 1).tracking_state = values.isTrackingState();
+                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id - 1).tracking_quality = values.getQuality();
 
                 //Logging:
-                if(DEBUG_OUT) {
+                if (DEBUG_OUT) {
                     System.out.println("Tracking marker: " + marker_id);
                     System.out.println("Tracking state: " + values.isTrackingState());
                     System.out.println("Tracking quality: " + values.getQuality());
@@ -182,7 +199,7 @@ public class Template extends ARViewActivity {
             int best_quality_index = -1;
 
             for (int i = 0; i < AppGlobal.current_physical_alignment_tool.tool_tracking_markers.size(); i++) {
-                TrackingMarker current_tracking_marker =  AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i);
+                TrackingMarker current_tracking_marker = AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i);
                 current_tracking_marker.tracking_state = false;
                 current_tracking_marker.marker_3d_content.setVisible(false);
                 if (current_tracking_marker.tracking_quality > minimum_quality_thresh && current_tracking_marker.tracking_quality > best_tracking_quality) {
@@ -196,23 +213,39 @@ public class Template extends ARViewActivity {
                 AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(best_quality_index).marker_3d_content.setVisible(true);
 
                 // Logging:
-                if(DEBUG_OUT) {
+                if (DEBUG_OUT) {
                     System.out.println("Chosen Tracking Marker: " + (best_quality_index + 1));
                     System.out.println("Chosen Marker's Tracking Quality: " + best_tracking_quality);
                 }
 
             } else {
                 // ...Do Something in the UI to show the user that there is insufficient tracking quality
-                if(DEBUG_OUT)
+                if (DEBUG_OUT)
                     System.out.println("Not Tracking: All tracking quality values are less than the threshold of: " + minimum_quality_thresh);
             }
-            if(DEBUG_OUT)
+            if (DEBUG_OUT)
                 System.out.println("----End of Tracking Event----");
         }
 
         @Override
         public void onSDKReady() {
+
             MetaioDebug.log("The SDK is ready");
+
+
+
+//            try{
+//                settings_button.post(new Runnable() {
+//                    public void run() {
+//                        Log.d("--ARAC--", "Set button visible");
+//                        settings_button.requestFocus();
+//                        settings_button.setVisibility(View.VISIBLE);
+//                    }});
+//                settings_button.invalidate();
+//            }catch (Exception e) {
+//                Log.d("ARAC", e.toString());
+//            }
+
         }
 
         @Override
@@ -263,8 +296,7 @@ public class Template extends ARViewActivity {
                                          int errorCode) {
             if (errorCode == 0) {
                 MetaioDebug.log("Visual search is successful");
-            }
-            else{
+            } else {
 
             }
         }
@@ -273,5 +305,36 @@ public class Template extends ARViewActivity {
         public void onVisualSearchStatusChanged(EVISUAL_SEARCH_STATE state) {
             MetaioDebug.log("The current visual search state is: " + state);
         }
+    }
+
+
+    ///////////////  ASYNC_TASKS  //////////////////////
+
+    private class ToggleButtonVisible extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... agr0) {
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+
+            // Check if the button is visible, otherwise make visible
+            if (settings_button.getVisibility() == View.VISIBLE) {
+                Log.d("--ARAC--", "Set button invisible");
+                settings_button.setVisibility(View.INVISIBLE);
+            } else {
+                Log.d("--ARAC--", "Set button visible");
+                settings_button.setVisibility(View.VISIBLE);
+            }
+        }
+
     }
 }
