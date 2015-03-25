@@ -17,66 +17,102 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Global Settings:"
         android:id="@+id/global_settings_textView"
-        android:textSize="25sp" />
+        android:textSize="22sp" />
 
     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:paddingBottom="40dp"
+        >
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Z:"
-            android:id="@+id/z_offset_textview"
-            android:textSize="22sp"
-            android:singleLine="true" />
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Z Offset:"
+                android:id="@+id/z_offset_textview"
+                android:textSize="18sp"
+                android:singleLine="true" />
 
-        <NumberPicker
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/z_offset_editText"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/z_offset_numberPicker"
-            />
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Scale:"
+                android:id="@+id/scale_textView"
+                android:textSize="18sp"
+                android:singleLine="true" />
 
-        <TextView
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/scale_editText"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="S:"
-            android:id="@+id/scale_textView"
-            android:textSize="22sp"
-            android:singleLine="true" />
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center"
 
-        <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scale_numberPicker" />
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Transparency:"
+                android:id="@+id/transparency_textView"
+                android:textSize="18sp"
+                android:singleLine="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="T:"
-            android:id="@+id/transparency_textView"
-            android:textSize="22sp"
-            android:singleLine="true" />
-
-        <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/transparency_numberPicker" />
-
-
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/transparency_editText"
+                android:textAlignment="center" />
+        </LinearLayout>
     </LinearLayout>
 
+
     <LinearLayout
-
-
-
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        >
 
         <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
@@ -86,79 +122,116 @@
         <!--android:id="@+id/marker_id_textView"-->
         <!--android:textSize="20sp" />-->
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Marker Settings:"
+            android:id="@+id/Marker_Offsets_Title_textView"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Marker ID:"
+            android:id="@+id/textView4"
+            android:textSize="18sp" />
+
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:id="@+id/marker_ID_spinner"
             android:spinnerMode="dropdown" />
-
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="51dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Marker Settings:"
-            android:id="@+id/Marker_Offsets_Title_textView"
-            android:textSize="25sp" />
-    </LinearLayout>
-
-    <LinearLayout
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:baselineAligned="false" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="51dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="X:"
-            android:id="@+id/x_offset_textView"
-            android:textSize="22sp" />
-
-        <NumberPicker
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/x_offset_numberPicker"
-            />
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="51dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Y:"
-            android:id="@+id/y_offset_textView"
-            android:textSize="22sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="X Offset:"
+                android:id="@+id/textView"
+                android:textSize="18sp"
+                android:singleLine="true" />
 
-        <NumberPicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/y_offset_numberPicker" >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/x_offset_editText"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-        </NumberPicker>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="51dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="R:"
-            android:id="@+id/rotation_offset_textView"
-            android:textSize="22sp" />
-
-        <NumberPicker
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rotation_offset_numberPicker" >
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center" >
 
-        </NumberPicker>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Y Offset:"
+                android:id="@+id/textView2"
+                android:textSize="18sp"
+                android:singleLine="true" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberSigned"
+                android:ems="10"
+                android:id="@+id/y_offset_editText"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Rotation:"
+                android:id="@+id/textView3"
+                android:textSize="18sp"
+                android:singleLine="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/rotation_editText"
+                android:textAlignment="center" />
+        </LinearLayout>
     </LinearLayout>
-
 
 
 </LinearLayout>

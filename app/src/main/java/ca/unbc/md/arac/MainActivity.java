@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 
         SharedPreferences preferences = this.getSharedPreferences("ca.unbc.md.arac", Context.MODE_PRIVATE);
         AppGlobal.shared_preferences = preferences;
-        AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolConfiguration();
+        AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolManager();
         AppGlobal.current_physical_alignment_tool = AppGlobal.physical_alignment_tool_configuration.physical_alignment_tools.get("Augmented_Workspace");
         AppGlobal.current_geometry_filename = "Starry_Night.png";
 

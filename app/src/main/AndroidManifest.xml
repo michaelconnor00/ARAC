@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Template"
+            android:name=".TrackingActivity"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             >
@@ -81,7 +81,7 @@
         <activity
             android:name=".CalibrationActivity"
             android:label="@string/title_activity_calibration"
-            android:parentActivityName=".Template" >
+            android:parentActivityName=".TrackingActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.unbc.md.arac.MainActivity" />
@@ -97,10 +97,10 @@
         <activity
             android:name=".ToolsMenuActivity"
             android:label="@string/title_activity_tools_menu"
-            android:parentActivityName=".Template" >
+            android:parentActivityName=".TrackingActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.unbc.md.arac.Template" />
+                android:value=".TrackingActivity" />
         </activity>
         <activity
             android:name=".HelpActivity"

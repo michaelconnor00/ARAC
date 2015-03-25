@@ -29,7 +29,7 @@ public class PhysicalAlignmentTool {
     }
 
 
-    public String get_tool_name(){
+    public String get_tool_id(){
         return tool_id;
     }
 }

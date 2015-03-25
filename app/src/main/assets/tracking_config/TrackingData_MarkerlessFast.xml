@@ -77,7 +77,7 @@
 				<MaxObjectsToTrackInParallel>1</MaxObjectsToTrackInParallel>
 
 				<!--	Default similarity threshold for specifying whether
-						template tracking was successful or failed. The
+						activity_tracking tracking was successful or failed. The
 						tracking quality measure is defined between -1 and 1,
 						where 1 is the best	possible value. If the tracking
 						quality	is reported to be below the threshold, the
@@ -92,7 +92,7 @@
 			</Parameters>
 
 			<!--	Define a "SensorCOS" for this sensor. This is essentially a
-					coordinate system associated with a template image that is
+					coordinate system associated with a activity_tracking image that is
 					to be tracked. -->
 			<SensorCOS>
 
@@ -104,7 +104,7 @@
 				<Parameters>
 
 					<!--	Reference image file name. If available, width and
-							height of the tracking template in millimeters can
+							height of the tracking activity_tracking in millimeters can
 							be specified by adding attributes "WidthMM" and/or
 							"HeightMM". If these values are not specified at
 							all, the width and height of the reference image in
