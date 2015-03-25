@@ -65,6 +65,7 @@
             android:name=".TrackingActivity"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="landscape"
             >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

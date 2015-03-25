@@ -33,6 +33,8 @@ public class TrackingActivity extends ARViewActivity {
     private MetaioSDKCallbackHandler mSDKCallback;
     private VisualSearchCallbackHandler mVisualSearchCallback;
     private ImageButton settings_button;
+    private ImageButton tools_button;
+    private ImageButton files_button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,16 @@ public class TrackingActivity extends ARViewActivity {
 //        EditText editText = (EditText) findViewById(R.id.edit_message);
 //        String message = editText.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public void launchToolsMenuReverse(View view) {
+        Intent intent = new Intent(this, ToolsMenuActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchFileMenu(View view) {
+        Intent intent = new Intent(this, FileManagerActivity.class);
         startActivity(intent);
     }
 
@@ -221,6 +233,8 @@ public class TrackingActivity extends ARViewActivity {
 
             // Turn settings_button visible
             settings_button = (ImageButton) findViewById(R.id.tracking_settings_button);
+            tools_button = (ImageButton) findViewById(R.id.tracking_tools_button);
+            files_button = (ImageButton) findViewById(R.id.tracking_files_button);
             new ToggleButtonVisible().execute();
 
         }
@@ -306,24 +320,17 @@ public class TrackingActivity extends ARViewActivity {
             try{
                 settings_button.post(new Runnable() {
                     public void run() {
-                        Log.d("--ARAC--", "Set button visible");
-//                        settings_button.requestFocus();
-                        settings_button.setVisibility(View.VISIBLE);
+                        Log.d("--ARAC--", "Set Tracking buttons visible");
+                        settings_button.setVisibility(ImageButton.VISIBLE);
                         settings_button.bringToFront();
+                        tools_button.setVisibility(ImageButton.VISIBLE);
+                        tools_button.bringToFront();
+                        files_button.setVisibility(ImageButton.VISIBLE);
+                        files_button.bringToFront();
                     }});
-//                settings_button.invalidate();
             }catch (Exception e) {
                 Log.d("ARAC", e.toString());
             }
-
-//            // Check if the button is visible, otherwise make visible
-//            if (settings_button.getVisibility() == View.VISIBLE) {
-//                Log.d("--ARAC--", "Set button invisible");
-//                settings_button.setVisibility(View.INVISIBLE);
-//            } else {
-//                Log.d("--ARAC--", "Set button visible");
-//                settings_button.setVisibility(View.VISIBLE);
-//            }
         }
 
     }
