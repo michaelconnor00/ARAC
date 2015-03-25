@@ -3,15 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/template"
     >
 
     <ImageButton
+        android:id="@+id/tracking_settings_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/settings"
         android:scaleType="fitCenter"
         android:onClick="launchCalibration"
         android:contentDescription="@string/assess_logo"
+        android:visibility="invisible"
         />
 
 </LinearLayout>

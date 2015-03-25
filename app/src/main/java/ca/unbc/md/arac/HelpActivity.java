@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import com.metaio.tools.io.AssetsManager;
+
 
 public class HelpActivity extends Activity {
 
@@ -14,10 +16,8 @@ public class HelpActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        WebView webview = (WebView) findViewById(R.id.webView);
-        setContentView(webview);
-
-        webview.loadUrl("file://assets/html/help.html");
+        WebView webview = (WebView) findViewById(R.id.webview);
+        webview.loadUrl("file:///android_assets/html/help.html");
 
     }
 
