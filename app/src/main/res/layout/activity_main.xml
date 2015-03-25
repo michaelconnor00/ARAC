@@ -26,14 +26,14 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/button_modman"
+        android:text="Tracking"
         android:onClick="launchModelManager"
         android:layout_margin="10dp"
         style="?android:attr/borderlessButtonStyle"
         android:background="@color/BlueAwesome"
         android:textColor="@color/White"
         />
-
+<!--
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -45,7 +45,8 @@
         android:background="@color/BlueAwesome"
         android:textColor="@color/White"
         />
-
+        -->
+<!--
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -57,6 +58,7 @@
         android:background="@color/BlueAwesome"
         android:textColor="@color/White"
         />
+-->
 
     <Button
         android:layout_width="fill_parent"

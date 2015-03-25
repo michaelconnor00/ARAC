@@ -1,8 +1,11 @@
 package ca.unbc.md.arac;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+
+import static android.view.View.OnClickListener;
 
 
 public class CalibrationActivity extends Activity {
@@ -46,17 +51,18 @@ public class CalibrationActivity extends Activity {
 
     @Override
     protected void onStop() {
+        updateSharedPreferencesWithControlValues();
         super.onStop();
 
+        //Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
+        //startActivity(intent);
         //final PhysicalAlignmentToolConfiguration tool_manager = AppGlobal.physical_alignment_tool_configuration;
-
-
     }
 
-    private void initializeMarkerSelectionSpinner(){
+    private void initializeMarkerSelectionSpinner() {
         marker_id_list = new ArrayList<String>();
 
-        for(int i = 0; i < AppGlobal.current_physical_alignment_tool.tool_tracking_markers.size(); i++){
+        for (int i = 0; i < AppGlobal.current_physical_alignment_tool.tool_tracking_markers.size(); i++) {
             marker_id_list.add(Integer.toString(AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i).marker_ID));
         }
 
@@ -78,9 +84,22 @@ public class CalibrationActivity extends Activity {
                 // your code here
             }
         });
+
+        spinner.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    updateSharedPreferencesWithControlValues();
+                }
+                return false;
+            }
+        });
+
+
     }
 
-    private void initializeTextFieldEventHandlers(){
+    private void initializeTextFieldEventHandlers() {
 
         // Get the tool manager, and currently selected tool.
         final PhysicalAlignmentToolManager tool_manager = AppGlobal.physical_alignment_tool_configuration;
@@ -102,7 +121,8 @@ public class CalibrationActivity extends Activity {
         z_offset_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "z", z_offset_editText.getText().toString());
+                updateSharedPreferencesWithControlValues();
+                //tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "z", z_offset_editText.getText().toString());
             }
         });
 
@@ -110,16 +130,17 @@ public class CalibrationActivity extends Activity {
         scale_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                tool_manager.setGlobalScale(Float.parseFloat(scale_editText.getText().toString()));
+                updateSharedPreferencesWithControlValues();
+                //tool_manager.setGlobalScale(Float.parseFloat(scale_editText.getText().toString()));
             }
         });
-
 
 
         transparency_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                tool_manager.setGlobalTransparency(Float.parseFloat(transparency_editText.getText().toString()));
+                updateSharedPreferencesWithControlValues();
+               // tool_manager.setGlobalTransparency(Float.parseFloat(transparency_editText.getText().toString()));
             }
         });
 
@@ -127,16 +148,17 @@ public class CalibrationActivity extends Activity {
         x_offset_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(),marker_id,"x",x_offset_editText.getText().toString());
+                updateSharedPreferencesWithControlValues();
+               // tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "x", x_offset_editText.getText().toString());
             }
         });
-
 
 
         y_offset_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(),marker_id,"y",y_offset_editText.getText().toString());
+                updateSharedPreferencesWithControlValues();
+                //tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "y", y_offset_editText.getText().toString());
             }
         });
 
@@ -153,10 +175,33 @@ public class CalibrationActivity extends Activity {
 */
     }
 
-    private void updateControlsWithValuesFromSharedPreferences(){
+    private void updateSharedPreferencesWithControlValues() {
+        // Get the tool manager, and currently selected tool.
+        final PhysicalAlignmentToolManager tool_manager = AppGlobal.physical_alignment_tool_configuration;
+        final PhysicalAlignmentTool current_tool = AppGlobal.current_physical_alignment_tool;
+
+        Spinner spinner = (Spinner) findViewById(R.id.marker_ID_spinner);
+        final int marker_id = Integer.parseInt((String) spinner.getSelectedItem());
+
+        final EditText z_offset_editText = (EditText) findViewById(R.id.z_offset_editText);
+        final EditText scale_editText = (EditText) findViewById(R.id.scale_editText);
+        final EditText transparency_editText = (EditText) findViewById(R.id.transparency_editText);
+        final EditText x_offset_editText = (EditText) findViewById(R.id.x_offset_editText);
+        final EditText y_offset_editText = (EditText) findViewById(R.id.y_offset_editText);
+        final EditText rotation_editText = (EditText) findViewById(R.id.rotation_editText);
+
+        tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "z", z_offset_editText.getText().toString());
+        tool_manager.setGlobalScale(Float.parseFloat(scale_editText.getText().toString()));
+        tool_manager.setGlobalTransparency(Float.parseFloat(transparency_editText.getText().toString()));
+        tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "x", x_offset_editText.getText().toString());
+        tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "y", y_offset_editText.getText().toString());
+
+    }
+
+    private void updateControlsWithValuesFromSharedPreferences() {
         // Get the current Selected marker from the marker spinner.
         Spinner spinner = (Spinner) findViewById(R.id.marker_ID_spinner);
-        int marker_id = Integer.parseInt((String)spinner.getSelectedItem());
+        int marker_id = Integer.parseInt((String) spinner.getSelectedItem());
 
         // Get the tool manager, and currently selected tool.
         PhysicalAlignmentToolManager tool_manager = AppGlobal.physical_alignment_tool_configuration;
@@ -180,7 +225,7 @@ public class CalibrationActivity extends Activity {
     }
 
 
-    public void populateNumberPickers(){
+    public void populateNumberPickers() {
 /*
         NumberPicker np = (NumberPicker) findViewById(R.id.x_offset_numberPicker);
         Integer[] nums = new Integer[2000];

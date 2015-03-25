@@ -2,16 +2,11 @@ package ca.unbc.md.arac;
 
 import java.io.File;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.metaio.sdk.ARViewActivity;
@@ -35,6 +30,7 @@ public class TrackingActivity extends ARViewActivity {
     private ImageButton settings_button;
     private ImageButton tools_button;
     private ImageButton files_button;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,7 +70,6 @@ public class TrackingActivity extends ARViewActivity {
         }
     }
 
-
     public void launchCalibration(View view) {
         Intent intent = new Intent(this, CalibrationActivity.class);
 //        EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -108,8 +103,8 @@ public class TrackingActivity extends ARViewActivity {
         MetaioDebug.log("Tracking data loaded: " + result);
 
 
-        String geometry_filename = AppGlobal.current_geometry_filename;
-        final File model_file = AssetsManager.getAssetPathAsFile(getApplicationContext(), geometry_filename);
+       String geometry_filename = AppGlobal.current_geometry_filename;
+       final File model_file = AssetsManager.getAssetPathAsFile(getApplicationContext(), geometry_filename);
 
         if (model_file != null) {
             PhysicalAlignmentToolManager physical_alignment_tool_configuration = AppGlobal.physical_alignment_tool_configuration;
@@ -126,18 +121,19 @@ public class TrackingActivity extends ARViewActivity {
 
     // Currently, we will only support .png images
     protected boolean is_file_type_image(String content_filename) {
-        String file_extension = content_filename.substring(content_filename.indexOf('.'));
-        if (file_extension.equalsIgnoreCase(".png")) {
+       String file_extension = content_filename.substring(content_filename.indexOf('.'));
+       if (file_extension.equalsIgnoreCase(".png")) {
             return true;
-        } else {
+       } else {
             return false;
-        }
+       }
     }
 
     @Override
     protected IMetaioSDKCallback getMetaioSDKCallbackHandler() {
         return mSDKCallback;
     }
+
 
 
     //////////////////// START Public Interface ////////////////////////////////////////////////////
@@ -155,6 +151,8 @@ public class TrackingActivity extends ARViewActivity {
     //////////////////// END Public Interface //////////////////////////////////////////////////////
 
 
+
+
     /*
     Handles all the call back events from the Metaio SDK
      */
@@ -170,7 +168,7 @@ public class TrackingActivity extends ARViewActivity {
         @Override
         public void onTrackingEvent(TrackingValuesVector trackingValues) {
 
-            if (DEBUG_OUT)
+            if(DEBUG_OUT)
                 System.out.println("----Tracking Event Occurred----");
 
             // First, Update all tracking statuses from trackingValues vector
@@ -181,11 +179,11 @@ public class TrackingActivity extends ARViewActivity {
                 int marker_id = trackingValues.get(tracking_values_index).getCoordinateSystemID(); // ID's start from 1.
 
                 // Update tracking data based on the TrackingValuesVector attributes
-                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id - 1).tracking_state = values.isTrackingState();
-                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id - 1).tracking_quality = values.getQuality();
+                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id -1).tracking_state = values.isTrackingState();
+                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(marker_id -1).tracking_quality = values.getQuality();
 
                 //Logging:
-                if (DEBUG_OUT) {
+                if(DEBUG_OUT) {
                     System.out.println("Tracking marker: " + marker_id);
                     System.out.println("Tracking state: " + values.isTrackingState());
                     System.out.println("Tracking quality: " + values.getQuality());
@@ -198,7 +196,7 @@ public class TrackingActivity extends ARViewActivity {
             int best_quality_index = -1;
 
             for (int i = 0; i < AppGlobal.current_physical_alignment_tool.tool_tracking_markers.size(); i++) {
-                TrackingMarker current_tracking_marker = AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i);
+                TrackingMarker current_tracking_marker =  AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i);
                 current_tracking_marker.tracking_state = false;
                 current_tracking_marker.marker_3d_content.setVisible(false);
                 if (current_tracking_marker.tracking_quality > minimum_quality_thresh && current_tracking_marker.tracking_quality > best_tracking_quality) {
@@ -212,23 +210,22 @@ public class TrackingActivity extends ARViewActivity {
                 AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(best_quality_index).marker_3d_content.setVisible(true);
 
                 // Logging:
-                if (DEBUG_OUT) {
+                if(DEBUG_OUT) {
                     System.out.println("Chosen Tracking Marker: " + (best_quality_index + 1));
                     System.out.println("Chosen Marker's Tracking Quality: " + best_tracking_quality);
                 }
 
             } else {
                 // ...Do Something in the UI to show the user that there is insufficient tracking quality
-                if (DEBUG_OUT)
+                if(DEBUG_OUT)
                     System.out.println("Not Tracking: All tracking quality values are less than the threshold of: " + minimum_quality_thresh);
             }
-            if (DEBUG_OUT)
+            if(DEBUG_OUT)
                 System.out.println("----End of Tracking Event----");
         }
 
         @Override
         public void onSDKReady() {
-
             MetaioDebug.log("The SDK is ready");
 
             // Turn settings_button visible
@@ -287,7 +284,8 @@ public class TrackingActivity extends ARViewActivity {
                                          int errorCode) {
             if (errorCode == 0) {
                 MetaioDebug.log("Visual search is successful");
-            } else {
+            }
+            else{
 
             }
         }
@@ -334,4 +332,5 @@ public class TrackingActivity extends ARViewActivity {
         }
 
     }
+
 }
