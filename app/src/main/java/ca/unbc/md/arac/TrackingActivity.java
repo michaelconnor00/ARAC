@@ -122,22 +122,6 @@ public class TrackingActivity extends ARViewActivity {
 
 
 
-    //////////////////// START Public Interface ////////////////////////////////////////////////////
-/*
-    public void run_tracking_setup()throws Exception{
-        setupTracking();
-        metaioSDK.startCamera(); //TODO  Need to test this
-    }
-
-    public void terminate_tracking_processes(){
-        metaioSDK.stopCamera(); //TODO Need to test this
-    }
-    */
-
-    //////////////////// END Public Interface //////////////////////////////////////////////////////
-
-
-
 
     /*
     Handles all the call back events from the Metaio SDK

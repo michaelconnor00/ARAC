@@ -21,6 +21,7 @@ public class ToolsMenuActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tools_menu);
 
@@ -58,9 +59,11 @@ public class ToolsMenuActivity extends ListActivity {
         launchTemplate();
     }
 
+
     private void makeToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
 
     private void loadToolsList() {
         String toolsList[] = new String[0];
@@ -76,11 +79,13 @@ public class ToolsMenuActivity extends ListActivity {
 
     public void launchTemplate(){
         // TODO remove hardcoded stuff...Once we have the proper user interfaces to specify this stuff...
-        AppGlobal.current_geometry_filename = "models/Starry_Night.png"; //TODO this needs to be set in conjuntion with File Manager
+        // AppGlobal.current_geometry_filename = "models/Starry_Night.png"; //TODO this needs to be set in conjuntion with File Manager
+
         // Start AR Activity on success
         Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
         startActivity(intent);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -93,7 +98,6 @@ public class ToolsMenuActivity extends ListActivity {
         if (id == R.id.action_tools) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -72,7 +72,12 @@ public class FileManagerActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         String item = (String) getListAdapter().getItem(position);
         AppGlobal.current_geometry_filename = item;
-        launchTemplate();
+        if(AppGlobal.current_physical_alignment_tool != null) {
+            launchTracking();
+        }
+        else{
+            launchToolMenu();
+        }
     }
 
     private void makeToast(String message){
@@ -111,9 +116,15 @@ public class FileManagerActivity extends ListActivity {
     }
 
 
-    public void launchTemplate(){
+    public void launchTracking(){
         // Start AR Activity on success
         Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchToolMenu(){
+        // Start the Tool Selector Menu
+        Intent intent = new Intent(getApplicationContext(), ToolsMenuActivity.class);
         startActivity(intent);
     }
 
