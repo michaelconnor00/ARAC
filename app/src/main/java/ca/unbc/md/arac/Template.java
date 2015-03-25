@@ -2,11 +2,13 @@ package ca.unbc.md.arac;
 
 import java.io.File;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -68,21 +70,6 @@ public class Template extends ARViewActivity {
             MetaioDebug.log(Log.ERROR, "Failed to load content: " + e);
             System.exit(0);
         }
-
-        // Turn settings_button visible
-        settings_button = (ImageButton) findViewById(R.id.tracking_settings_button);
-        new ToggleButtonVisible().execute();
-
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 5s = 5000ms
-                buttons[inew][jnew].setBackgroundColor(Color.BLACK);
-            }
-        }, 5000);
-
     }
 
 
@@ -232,19 +219,9 @@ public class Template extends ARViewActivity {
 
             MetaioDebug.log("The SDK is ready");
 
-
-
-//            try{
-//                settings_button.post(new Runnable() {
-//                    public void run() {
-//                        Log.d("--ARAC--", "Set button visible");
-//                        settings_button.requestFocus();
-//                        settings_button.setVisibility(View.VISIBLE);
-//                    }});
-//                settings_button.invalidate();
-//            }catch (Exception e) {
-//                Log.d("ARAC", e.toString());
-//            }
+            // Turn settings_button visible
+            settings_button = (ImageButton) findViewById(R.id.tracking_settings_button);
+            new ToggleButtonVisible().execute();
 
         }
 
@@ -326,14 +303,27 @@ public class Template extends ARViewActivity {
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
 
-            // Check if the button is visible, otherwise make visible
-            if (settings_button.getVisibility() == View.VISIBLE) {
-                Log.d("--ARAC--", "Set button invisible");
-                settings_button.setVisibility(View.INVISIBLE);
-            } else {
-                Log.d("--ARAC--", "Set button visible");
-                settings_button.setVisibility(View.VISIBLE);
+            try{
+                settings_button.post(new Runnable() {
+                    public void run() {
+                        Log.d("--ARAC--", "Set button visible");
+//                        settings_button.requestFocus();
+                        settings_button.setVisibility(View.VISIBLE);
+                        settings_button.bringToFront();
+                    }});
+//                settings_button.invalidate();
+            }catch (Exception e) {
+                Log.d("ARAC", e.toString());
             }
+
+//            // Check if the button is visible, otherwise make visible
+//            if (settings_button.getVisibility() == View.VISIBLE) {
+//                Log.d("--ARAC--", "Set button invisible");
+//                settings_button.setVisibility(View.INVISIBLE);
+//            } else {
+//                Log.d("--ARAC--", "Set button visible");
+//                settings_button.setVisibility(View.VISIBLE);
+//            }
         }
 
     }

@@ -64,7 +64,8 @@
         <activity
             android:name=".Template"
             android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ca.unbc.md.arac.FileManagerActivity" />
