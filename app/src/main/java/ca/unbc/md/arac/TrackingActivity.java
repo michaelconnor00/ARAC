@@ -3,9 +3,11 @@ package ca.unbc.md.arac;
 import java.io.File;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.metaio.sdk.ARViewActivity;
 import com.metaio.sdk.MetaioDebug;
@@ -25,7 +27,9 @@ public class TrackingActivity extends ARViewActivity {
 
     private MetaioSDKCallbackHandler mSDKCallback;
     private VisualSearchCallbackHandler mVisualSearchCallback;
-
+    private ImageButton settings_button;
+    private ImageButton tools_button;
+    private ImageButton files_button;
 
 
     @Override
@@ -71,6 +75,16 @@ public class TrackingActivity extends ARViewActivity {
 //        EditText editText = (EditText) findViewById(R.id.edit_message);
 //        String message = editText.getText().toString();
 //        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public void launchToolsMenuReverse(View view) {
+        Intent intent = new Intent(this, ToolsMenuActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchFileMenu(View view) {
+        Intent intent = new Intent(this, FileManagerActivity.class);
         startActivity(intent);
     }
 
@@ -198,6 +212,13 @@ public class TrackingActivity extends ARViewActivity {
         @Override
         public void onSDKReady() {
             MetaioDebug.log("The SDK is ready");
+
+            // Turn settings_button visible
+            settings_button = (ImageButton) findViewById(R.id.tracking_settings_button);
+            tools_button = (ImageButton) findViewById(R.id.tracking_tools_button);
+            files_button = (ImageButton) findViewById(R.id.tracking_files_button);
+            new ToggleButtonVisible().execute();
+
         }
 
         @Override
@@ -259,4 +280,42 @@ public class TrackingActivity extends ARViewActivity {
             MetaioDebug.log("The current visual search state is: " + state);
         }
     }
+
+
+    ///////////////  ASYNC_TASKS  //////////////////////
+
+    private class ToggleButtonVisible extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... agr0) {
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+
+            try{
+                settings_button.post(new Runnable() {
+                    public void run() {
+                        Log.d("--ARAC--", "Set Tracking buttons visible");
+                        settings_button.setVisibility(ImageButton.VISIBLE);
+                        settings_button.bringToFront();
+                        tools_button.setVisibility(ImageButton.VISIBLE);
+                        tools_button.bringToFront();
+                        files_button.setVisibility(ImageButton.VISIBLE);
+                        files_button.bringToFront();
+                    }});
+            }catch (Exception e) {
+                Log.d("ARAC", e.toString());
+            }
+        }
+
+    }
+
 }

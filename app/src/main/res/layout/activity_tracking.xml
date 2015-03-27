@@ -10,11 +10,39 @@
         android:id="@+id/tracking_settings_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/settings"
+        android:src="@drawable/tool_box"
         android:scaleType="fitCenter"
         android:onClick="launchCalibration"
         android:contentDescription="@string/assess_logo"
         android:visibility="invisible"
+        android:background="@null"
+        android:padding="10dp"
+        />
+
+    <ImageButton
+        android:id="@+id/tracking_tools_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/calibrate"
+        android:scaleType="fitCenter"
+        android:onClick="launchToolsMenuReverse"
+        android:contentDescription="@string/assess_logo"
+        android:visibility="invisible"
+        android:background="@null"
+        android:padding="10dp"
+        />
+
+    <ImageButton
+        android:id="@+id/tracking_files_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/file_icon"
+        android:scaleType="fitCenter"
+        android:onClick="launchFileMenu"
+        android:contentDescription="@string/assess_logo"
+        android:visibility="invisible"
+        android:background="@null"
+        android:padding="10dp"
         />
 
 </LinearLayout>
