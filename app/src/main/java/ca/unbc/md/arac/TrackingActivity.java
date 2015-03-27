@@ -32,6 +32,7 @@ public class TrackingActivity extends ARViewActivity {
     private ImageButton files_button;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,22 @@ public class TrackingActivity extends ARViewActivity {
         }
 
     }
+
+   @Override
+   protected void onStart(){
+
+       super.onStart();
+/*
+       if(contents_loaded){
+           try {
+               setupTracking();
+           } catch (Exception e) {
+               MetaioDebug.log(Log.ERROR, "Failed to load content: " + e);
+               System.exit(0);
+           }
+       }
+*/
+   }
 
     @Override
     protected void onDestroy() {
@@ -299,6 +316,7 @@ public class TrackingActivity extends ARViewActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
+
 
             try{
                 settings_button.post(new Runnable() {

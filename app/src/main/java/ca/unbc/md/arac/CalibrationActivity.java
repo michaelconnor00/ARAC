@@ -50,10 +50,9 @@ public class CalibrationActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
+        super.onPause();
         updateSharedPreferencesWithControlValues();
-        super.onStop();
-
         //Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
         //startActivity(intent);
         //final PhysicalAlignmentToolConfiguration tool_manager = AppGlobal.physical_alignment_tool_configuration;

@@ -96,17 +96,16 @@ public class PhysicalAlignmentToolManager {
         String tool_id = "A4_Drawing_Canvas";
 
         // Specify compatible tracking.xml configuration files:
-        // TODO add tracking config files
         ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
-        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker.xml");
-        //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Medium_Smoothing_Fuser.xml");
+        tracking_configuration_filenames.add("A4_Drawing_Canvas_TrackingData_8_Marker.xml");
+        tracking_configuration_filenames.add("A4_Drawing_Canvas_TrackingData_8_Marker_Medium_Smoothing_Fuser.xml");
         //tracking_configuration_filenames.add("Augmented_Workspace_TrackingData_10_Marker_Heavy_Smoothing_Fuser.xml");
 
         // Initialize the tool:
-        PhysicalAlignmentTool augmented_workspace_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
+        PhysicalAlignmentTool a4_drawing_canvas_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
 
         // Add the tool to the list of tools:
-        physical_alignment_tools.put(tool_id, augmented_workspace_tool);
+        physical_alignment_tools.put(tool_id, a4_drawing_canvas_tool);
     }
 
 
@@ -147,7 +146,12 @@ public class PhysicalAlignmentToolManager {
         for (int i = 1; i <= number_of_tracking_markers; i++) {
 
             // Loading 3D geometry
-            geometry = metaioSDK.createGeometryFromImage(model_file);
+            if (isGeometryAnImage){
+                geometry = metaioSDK.createGeometryFromImage(model_file);
+            }
+            else{
+                geometry = metaioSDK.createGeometry(model_file);
+            }
 
             if (geometry != null) {
                 geometry.setCoordinateSystemID(i);
@@ -198,7 +202,13 @@ public class PhysicalAlignmentToolManager {
         for (int i = 1; i <= number_of_tracking_markers; i++) {
 
             // Loading 3D geometry
-            geometry = metaioSDK.createGeometryFromImage(model_file);
+            if (isGeometryAnImage){
+                geometry = metaioSDK.createGeometryFromImage(model_file);
+            }
+            else{
+                geometry = metaioSDK.createGeometry(model_file);
+            }
+
 
             if (geometry != null) {
                 geometry.setCoordinateSystemID(i);
@@ -235,12 +245,10 @@ public class PhysicalAlignmentToolManager {
 
 
     public void configure_A4_drawing_canvas_tool(IMetaioSDKAndroid metaioSDK, File model_file, boolean isGeometryAnImage){
-
-        /*
         ArrayList<TrackingMarker> tracking_markers = new ArrayList<TrackingMarker>();
 
         // Specify tracking marker configurations:
-        int number_of_tracking_markers = 10;
+        int number_of_tracking_markers = 8;
         TrackingMarker tracking_marker;
         IGeometry geometry;
         TrackingMarkerPosition marker_position;
@@ -248,14 +256,20 @@ public class PhysicalAlignmentToolManager {
         for (int i = 1; i <= number_of_tracking_markers; i++) {
 
             // Loading 3D geometry
-            geometry = metaioSDK.createGeometryFromImage(model_file);
+            if (isGeometryAnImage){
+                geometry = metaioSDK.createGeometryFromImage(model_file);
+            }
+            else{
+                geometry = metaioSDK.createGeometry(model_file);
+            }
+
 
             if (geometry != null) {
                 geometry.setCoordinateSystemID(i);
                 geometry.setName("" + i);
                 geometry.setVisible(false);
-                geometry.setTransparency(global_geometry_transparency);
-                geometry.setScale(global_geometry_scale);
+                geometry.setTransparency((float)getGlobalTransparency());
+                geometry.setScale((float)getGlobalScale());
 
 
                 // Set the translation offsets and rotation for each specific marker ID.
@@ -268,54 +282,8 @@ public class PhysicalAlignmentToolManager {
                             (float) Math.PI / 2, 0.0f, 0.0f));
                 }
 
-                // Offset configuration for workbench space
-                switch (i) {
-                    case 1:
-                        marker_position = new TrackingMarkerPosition(62, 62, 20,
-                                rotation);
-                        break;
-                    case 2:
-                        marker_position = new TrackingMarkerPosition(62, -203,
-                                20, rotation);
-                        break;
-                    case 3:
-                        marker_position = new TrackingMarkerPosition(62, -467,
-                                20, rotation);
-                        break;
-                    case 4:
-                        marker_position = new TrackingMarkerPosition(-202, -467,
-                                20, rotation);
-                        break;
-                    case 5:
-                        marker_position = new TrackingMarkerPosition(-484, -468,
-                                20, rotation);
-                        break;
-                    case 6:
-                        marker_position = new TrackingMarkerPosition(-773, -469,
-                                20, rotation);
-                        break;
-                    case 7:
-                        marker_position = new TrackingMarkerPosition(-773, -192,
-                                20, rotation);
-                        break;
-                    case 8:
-                        marker_position = new TrackingMarkerPosition(-773, 62,
-                                20, rotation);
-                        break;
-                    case 9:
-                        marker_position = new TrackingMarkerPosition(-485, 62,
-                                20, rotation);
-                        break;
-                    case 10:
-                        marker_position = new TrackingMarkerPosition(-202, 62,
-                                20, rotation);
-                        break;
-                    default:
-                        throw new Exception("A Marker ID's position offset was not specified in setupTracking()");
-                }
-
-                geometry.setTranslation(new Vector3d(marker_position.x_offset, marker_position.y_offset, marker_position.z_offset));
-                geometry.setRotation(marker_position.rotation);
+                geometry.setTranslation(new Vector3d(getPhysicalToolAttribute("A4_Drawing_Canvas", i ,"x"), getPhysicalToolAttribute("A4_Drawing_Canvas", i ,"y"), getPhysicalToolAttribute("A4_Drawing_Canvas" ,"z")));
+                geometry.setRotation(rotation);
 
                 tracking_marker = new TrackingMarker(i, geometry);
                 tracking_markers.add(tracking_marker);
@@ -325,9 +293,8 @@ public class PhysicalAlignmentToolManager {
         }
 
         // Tool was previously initialized, so just update it with the configuration:
-        PhysicalAlignmentTool workspace_tool = physical_alignment_tools.get("Augmented Workspace");
+        PhysicalAlignmentTool workspace_tool = physical_alignment_tools.get("A4_Drawing_Canvas");
         workspace_tool.tool_tracking_markers = tracking_markers;
-        */
 
     }
 
@@ -452,26 +419,29 @@ public class PhysicalAlignmentToolManager {
         preferences.edit().putString("Augmented_Workspace_9_y", "62").apply();
         preferences.edit().putString("Augmented_Workspace_10_y", "62").apply();
 
-        preferences.edit().putString("Augmented_Workspace_z", "1").apply();
+        preferences.edit().putString("Augmented_Workspace_z", "19").apply();
 
 
         // A4_Drawing_Canvas:
         // TODO specify default values and configure this tool (A4_Drawing_Canvas)...
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_x", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_2_x", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_3_x", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_4_x", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_5_x", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_6_x", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_1_x", "70").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_2_x", "70").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_3_x", "70").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_4_x", "-100").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_5_x", "-285").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_6_x", "-285").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_7_x", "-285").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_8_x", "-107").apply();
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_y", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_2_y", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_3_y", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_4_y", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_5_y", "62").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_6_y", "62").apply();
-
+        preferences.edit().putString("A4_Drawing_Canvas_1_y", "38").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_2_y", "-142").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_3_y", "-315").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_4_y", "-315").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_5_y", "-315").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_6_y", "-146").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_7_y", "38").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_8_y", "38").apply();
 
         preferences.edit().putString("A4_Drawing_Canvas_z", "1").apply();
 
