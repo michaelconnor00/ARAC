@@ -20,35 +20,28 @@ import java.util.Map;
  */
 public class PhysicalAlignmentToolManager {
 
-
     // Maintains a list of all the specified alignment tools:
     // String = Key = Tool ID Name
     // PhysicalAlignmentTool = The tool object
     Map<String, PhysicalAlignmentTool> physical_alignment_tools = new HashMap<String,PhysicalAlignmentTool>();
 
-
-    // Global Geometry Parameters:
-//    float global_geometry_transparency = 0.5f;
-//    float global_geometry_scale = 1.0f;
-
-
     public PhysicalAlignmentToolManager(){
 
         // Initialize all physical tools:
         try {
-            // TODO only set shred prefs to default on very first app launch
+
             if(!isSharedPreferencesInitialized()){
                 setPhysicalToolSharedPreferencesToDefault();
             }
-
 
             initialize_square_edge_tool();
             initialize_augmented_workspace_tool();
             initialize_A4_drawing_canvas_tool();
         }
         catch(Exception e){
-            //TODO : add better error handling here..
+            //TODO : add better error handling here...
             // There was an error in tool initialization
+            System.out.println("There was an error with physical tool initialization");
             System.exit(0);
         }
 
@@ -464,21 +457,44 @@ public class PhysicalAlignmentToolManager {
 
         // A4_Drawing_Canvas:
         // TODO specify default values and configure this tool (A4_Drawing_Canvas)...
+
+        preferences.edit().putString("A4_Drawing_Canvas_1_x", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_2_x", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_3_x", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_4_x", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_5_x", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_6_x", "62").apply();
+
+        preferences.edit().putString("A4_Drawing_Canvas_1_y", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_2_y", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_3_y", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_4_y", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_5_y", "62").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_6_y", "62").apply();
+
+
+        preferences.edit().putString("A4_Drawing_Canvas_z", "1").apply();
+
+
+
+        // Set the flag specifying that the shared preferences default values have been set:
+        preferences.edit().putString("Default_Values_Have_Been_Set","Yes").apply();
+
     }
 
 
    private boolean isSharedPreferencesInitialized(){
        SharedPreferences preferences = AppGlobal.shared_preferences;
 
-       // TODO create a dedicated value in shred prefs, instead of using transparency value.
-
-       // Set the default value to -99.9.
-       double initialization_test_result = Double.parseDouble(preferences.getString("Global_Transparency", "-99.9"));
+       String initialization_test_result = preferences.getString("Default_Values_Have_Been_Set", "No");
 
        // If the default value is returned, then the shared prefs have not been initialized yet.
-       if(initialization_test_result == -99.0){
+       if(initialization_test_result == "Yes"){
+           return true;
+       }
+       else{
            return false;
        }
-       return true;
+
     }
 }
