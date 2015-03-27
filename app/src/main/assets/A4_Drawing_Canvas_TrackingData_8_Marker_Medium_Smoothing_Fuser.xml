@@ -97,7 +97,7 @@
 
                 <Parameters>
                     <MarkerParameters>
-                        <Size>60</Size>
+                        <Size>40</Size>
                         <MatrixID>1</MatrixID>
                     </MarkerParameters>
                 </Parameters>
@@ -108,7 +108,7 @@
 				<SensorCosID>Marker2</SensorCosID>
 				<Parameters>
 					<MarkerParameters>
-						<Size>60</Size>
+						<Size>40</Size>
 						<MatrixID>2</MatrixID>
 					</MarkerParameters>
 				</Parameters>
@@ -118,7 +118,7 @@
 				<SensorCosID>Marker3</SensorCosID>
 				<Parameters>
 					<MarkerParameters>
-						<Size>60</Size>
+						<Size>40</Size>
 						<MatrixID>3</MatrixID>
 					</MarkerParameters>
 				</Parameters>
@@ -128,7 +128,7 @@
 				<SensorCosID>Marker4</SensorCosID>
 				<Parameters>
 					<MarkerParameters>
-						<Size>60</Size>
+						<Size>40</Size>
 						<MatrixID>4</MatrixID>
 					</MarkerParameters>
 				</Parameters>
@@ -138,7 +138,7 @@
 				<SensorCosID>Marker5</SensorCosID>
 				<Parameters>
 					<MarkerParameters>
-						<Size>60</Size>
+						<Size>40</Size>
 						<MatrixID>5</MatrixID>
 					</MarkerParameters>
 				</Parameters>
@@ -148,7 +148,7 @@
 				<SensorCosID>Marker6</SensorCosID>
 				<Parameters>
 					<MarkerParameters>
-						<Size>60</Size>
+						<Size>40</Size>
 						<MatrixID>6</MatrixID>
 					</MarkerParameters>
 				</Parameters>
@@ -158,7 +158,7 @@
 				<SensorCosID>Marker7</SensorCosID>
 				<Parameters>
 					<MarkerParameters>
-						<Size>60</Size>
+						<Size>40</Size>
 						<MatrixID>7</MatrixID>
 					</MarkerParameters>
 				</Parameters>
@@ -167,7 +167,7 @@
 				<SensorCosID>Marker8</SensorCosID>
 				<Parameters>
 					<MarkerParameters>
-						<Size>60</Size>
+						<Size>40</Size>
 						<MatrixID>8</MatrixID>
 					</MarkerParameters>
 				</Parameters>

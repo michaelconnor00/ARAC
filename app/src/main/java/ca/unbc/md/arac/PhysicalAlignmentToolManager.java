@@ -425,23 +425,23 @@ public class PhysicalAlignmentToolManager {
         // A4_Drawing_Canvas:
         // TODO specify default values and configure this tool (A4_Drawing_Canvas)...
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_x", "70").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_2_x", "70").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_3_x", "70").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_4_x", "-100").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_5_x", "-285").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_6_x", "-285").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_7_x", "-285").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_8_x", "-107").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_1_x", "180").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_2_x", "180").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_3_x", "180").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_4_x", "10").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_5_x", "-175").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_6_x", "-175").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_7_x", "-175").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_8_x", "-3").apply();
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_y", "38").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_2_y", "-142").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_3_y", "-315").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_4_y", "-315").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_5_y", "-315").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_6_y", "-146").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_7_y", "38").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_8_y", "38").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_1_y", "183").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_2_y", "3").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_3_y", "-170").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_4_y", "-170").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_5_y", "-170").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_6_y", "-1").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_7_y", "183").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_8_y", "183").apply();
 
         preferences.edit().putString("A4_Drawing_Canvas_z", "1").apply();
 
