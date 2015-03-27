@@ -17,7 +17,8 @@ public class HelpActivity extends Activity {
         setContentView(R.layout.activity_help);
 
         WebView webview = (WebView) findViewById(R.id.webview);
-        webview.loadUrl("file:///android_assets/html/help.html");
+
+        webview.loadUrl("file:///android_asset/html/help.html");
 
     }
 
