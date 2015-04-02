@@ -393,7 +393,7 @@ public class PhysicalAlignmentToolManager {
         preferences.edit().putString("Square_Tool_5_y", "19").commit();
         preferences.edit().putString("Square_Tool_6_y", "18").commit();
 
-        preferences.edit().putString("Square_Tool_z", "1").commit();
+        preferences.edit().putString("Square_Tool_z", "0").commit();
 
 
 
@@ -426,25 +426,25 @@ public class PhysicalAlignmentToolManager {
         // A4_Drawing_Canvas:
         // TODO specify default values and configure this tool (A4_Drawing_Canvas)...
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_x", "70").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_2_x", "70").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_3_x", "70").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_4_x", "-100").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_5_x", "-285").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_6_x", "-285").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_7_x", "-285").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_8_x", "-107").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_1_x", "180").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_2_x", "180").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_3_x", "180").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_4_x", "10").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_5_x", "-175").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_6_x", "-175").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_7_x", "-175").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_8_x", "-3").commit();
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_y", "38").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_2_y", "-142").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_3_y", "-315").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_4_y", "-315").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_5_y", "-315").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_6_y", "-146").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_7_y", "38").commit();
-        preferences.edit().putString("A4_Drawing_Canvas_8_y", "38").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_1_y", "183").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_2_y", "3").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_3_y", "-170").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_4_y", "-170").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_5_y", "-170").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_6_y", "-1").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_7_y", "183").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_8_y", "183").commit();
 
-        preferences.edit().putString("A4_Drawing_Canvas_z", "1").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_z", "0").commit();
 
 
 

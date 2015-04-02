@@ -22,6 +22,7 @@ import com.google.vrtoolkit.cardboard.Viewport;
 
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.microedition.khronos.egl.EGLConfig;
 
@@ -47,6 +48,7 @@ public class MainActivity extends Activity{ //extends CardboardActivity implemen
 
 
         SharedPreferences preferences = this.getSharedPreferences("ca.unbc.md.arac", Context.MODE_PRIVATE);
+        //Map map = preferences.getAll();
         AppGlobal.shared_preferences = preferences;
         AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolManager();
 
