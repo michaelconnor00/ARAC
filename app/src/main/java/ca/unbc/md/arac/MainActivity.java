@@ -11,9 +11,21 @@ import android.view.View;
 import com.metaio.sdk.MetaioDebug;
 import com.metaio.tools.io.AssetsManager;
 
+
+
+import com.google.vrtoolkit.cardboard.CardboardActivity;
+import com.google.vrtoolkit.cardboard.CardboardView;
+import com.google.vrtoolkit.cardboard.Eye;
+import com.google.vrtoolkit.cardboard.HeadTransform;
+import com.google.vrtoolkit.cardboard.Viewport;
+
+
+
 import java.io.IOException;
 
-public class MainActivity extends Activity {
+import javax.microedition.khronos.egl.EGLConfig;
+
+public class MainActivity extends Activity{ //extends CardboardActivity implements CardboardView.StereoRenderer{
 
 
 
@@ -38,7 +50,18 @@ public class MainActivity extends Activity {
         AppGlobal.shared_preferences = preferences;
         AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolManager();
 
+
         setContentView(R.layout.activity_main);
+
+        /*
+        setContentView(R.layout.activity_main);
+        CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
+        // Associate a CardboardView.StereoRenderer with cardboardView.
+        cardboardView.setRenderer(this);
+        // Associate the cardboardView with this activity.
+        setCardboardView(cardboardView);
+        */
+
 
         // Enable metaio SDK debug log messages based on build configuration
         MetaioDebug.enableLogging(BuildConfig.DEBUG);
