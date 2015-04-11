@@ -10,7 +10,7 @@
         android:id="@+id/tracking_settings_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/calibrate"
+        android:src="@drawable/settings"
         android:scaleType="fitCenter"
         android:onClick="launchCalibration"
         android:contentDescription="@string/assess_logo"
