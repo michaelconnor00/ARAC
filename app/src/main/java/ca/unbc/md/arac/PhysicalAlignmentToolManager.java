@@ -37,6 +37,7 @@ public class PhysicalAlignmentToolManager {
             initialize_square_edge_tool();
             initialize_augmented_workspace_tool();
             initialize_A4_drawing_canvas_tool();
+            initialize_accuracy_demo_tool();
         }
         catch(Exception e){
             //TODO : add better error handling here...
@@ -108,6 +109,22 @@ public class PhysicalAlignmentToolManager {
         physical_alignment_tools.put(tool_id, a4_drawing_canvas_tool);
     }
 
+    private void initialize_accuracy_demo_tool(){
+
+        // This tool unique ID:
+        String tool_id = "accuracy_demo";
+
+        // Specify compatible tracking.xml configuration files:
+        ArrayList<String> tracking_configuration_filenames = new ArrayList<String>();
+        tracking_configuration_filenames.add("accuracy_demo.xml");
+
+        // Initialize the tool:
+        PhysicalAlignmentTool accuracy_demo_tool = new PhysicalAlignmentTool(tool_id, null, tracking_configuration_filenames);
+
+        // Add the tool to the list of tools:
+        physical_alignment_tools.put(tool_id, accuracy_demo_tool);
+    }
+
 
 
 
@@ -130,7 +147,63 @@ public class PhysicalAlignmentToolManager {
             case "A4_Drawing_Canvas":
                 configure_A4_drawing_canvas_tool(metaioSDK, model_file, isGeometryAnImage);
                 break;
+            case "accuracy_demo":
+                configure_accuracy_demo_tool(metaioSDK, model_file, isGeometryAnImage);
+                break;
         }
+    }
+
+    public void configure_accuracy_demo_tool(IMetaioSDKAndroid metaioSDK, File model_file, boolean isGeometryAnImage){
+        ArrayList<TrackingMarker> tracking_markers = new ArrayList<TrackingMarker>();
+
+        // Specify tracking marker configurations:
+        int number_of_tracking_markers = 2;
+        TrackingMarker tracking_marker;
+        IGeometry geometry;
+        TrackingMarkerPosition marker_position;
+
+        for (int i = 1; i <= number_of_tracking_markers; i++) {
+
+            // Loading 3D geometry
+            if (isGeometryAnImage){
+                geometry = metaioSDK.createGeometryFromImage(model_file);
+            }
+            else{
+                geometry = metaioSDK.createGeometry(model_file);
+            }
+
+
+            if (geometry != null) {
+                geometry.setCoordinateSystemID(i);
+                geometry.setName("" + i);
+                geometry.setVisible(false);
+                geometry.setTransparency((float)getGlobalTransparency());
+                geometry.setScale((float)getGlobalScale());
+
+
+                // Set the translation offsets and rotation for each specific marker ID.
+                Rotation rotation;
+                if (isGeometryAnImage) {
+                    rotation = new Rotation(new Vector3d(
+                            (float) 0.0f, 0.0f, 0.0f));
+                } else {
+                    rotation = new Rotation(new Vector3d(
+                            (float) Math.PI / 2, 0.0f, 0.0f));
+                }
+
+                geometry.setTranslation(new Vector3d(getPhysicalToolAttribute("accuracy_demo", i ,"x"), getPhysicalToolAttribute("accuracy_demo", i ,"y"), getPhysicalToolAttribute("accuracy_demo" ,"z")));
+                geometry.setRotation(rotation);
+
+                tracking_marker = new TrackingMarker(i, geometry);
+                tracking_markers.add(tracking_marker);
+
+            } else
+                MetaioDebug.log(Log.ERROR, "Error loading geometry: " + geometry);
+        }
+
+        // Tool was previously initialized, so just update it with the configuration:
+        PhysicalAlignmentTool workspace_tool = physical_alignment_tools.get("accuracy_demo");
+        workspace_tool.tool_tracking_markers = tracking_markers;
     }
 
     public void configure_square_edge_tool(IMetaioSDKAndroid metaioSDK, File model_file, boolean isGeometryAnImage) throws Exception{

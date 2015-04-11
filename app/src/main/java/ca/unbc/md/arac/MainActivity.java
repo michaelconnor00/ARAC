@@ -76,6 +76,11 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void launchDemo(View view){
+        Intent intent = new Intent(this, AccuracyDemoActivity.class);
+        startActivity(intent);
+    }
+
 }
 
 
