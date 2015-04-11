@@ -14,6 +14,7 @@
     <string name="button_help">Help</string>
     <string name="button_tools">Tools</string>
     <string name="button_tracking_tools">&#xe012;</string>
+    <string name="button_demo">Accuracy Demo</string>
 
 
     <string name="assess_logo">Logo</string>
@@ -25,5 +26,8 @@
     <string name="title_activity_template">Template</string>
     <string name="title_activity_tools_menu">Tools</string>
     <string name="title_activity_help">Help</string>
+    <string name="title_activity_accuracy_demo">AccuracyDemoActivity</string>
+
+    <string name="dist_label">Distance: </string>
 
 </resources>
