@@ -36,6 +36,14 @@ public class CalibrationActivity extends Activity {
 
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -120,7 +128,7 @@ public class CalibrationActivity extends Activity {
         z_offset_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                updateSharedPreferencesWithControlValues();
+               // updateSharedPreferencesWithControlValues();
                 //tool_manager.setPhysicalToolMarkerAttribute(current_tool.get_tool_id(), marker_id, "z", z_offset_editText.getText().toString());
             }
         });
@@ -129,7 +137,7 @@ public class CalibrationActivity extends Activity {
         scale_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                updateSharedPreferencesWithControlValues();
+                //updateSharedPreferencesWithControlValues();
                 //tool_manager.setGlobalScale(Float.parseFloat(scale_editText.getText().toString()));
             }
         });
@@ -138,7 +146,7 @@ public class CalibrationActivity extends Activity {
         transparency_editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                updateSharedPreferencesWithControlValues();
+               // updateSharedPreferencesWithControlValues();
                // tool_manager.setGlobalTransparency(Float.parseFloat(transparency_editText.getText().toString()));
             }
         });

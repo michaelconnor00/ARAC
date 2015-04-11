@@ -10,4 +10,5 @@ public class AppGlobal {
     public static PhysicalAlignmentToolManager physical_alignment_tool_configuration;
     public static PhysicalAlignmentTool current_physical_alignment_tool;
     public static String current_geometry_filename;
+
 }

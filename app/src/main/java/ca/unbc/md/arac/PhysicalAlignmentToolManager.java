@@ -399,7 +399,8 @@ public class PhysicalAlignmentToolManager {
 
     public void setPhysicalToolMarkerAttribute(String physical_tool_id, int marker_id, String attribute_id, String value){
         SharedPreferences preferences = AppGlobal.shared_preferences;
-        preferences.edit().putString(physical_tool_id + "_" + marker_id + "_" + attribute_id, value).apply();
+        preferences.edit().putString(physical_tool_id + "_" + marker_id + "_" + attribute_id, value).commit();
+
     }
 
     public float getPhysicalToolAttribute(String physical_tool_id, int marker_id, String attribute_id){
@@ -430,13 +431,13 @@ public class PhysicalAlignmentToolManager {
 
     public void setGlobalScale(float value){
         SharedPreferences preferences = AppGlobal.shared_preferences;
-        preferences.edit().putString("Global_Scale", String.valueOf(value)).apply();
+        preferences.edit().putString("Global_Scale", String.valueOf(value)).commit();
 
     }
 
     public void setGlobalTransparency(float value){
         SharedPreferences preferences = AppGlobal.shared_preferences;
-        preferences.edit().putString("Global_Transparency", String.valueOf(value)).apply();
+        preferences.edit().putString("Global_Transparency", String.valueOf(value)).commit();
     }
 
 
@@ -447,81 +448,81 @@ public class PhysicalAlignmentToolManager {
         SharedPreferences preferences = AppGlobal.shared_preferences;
 
         // Global Attributes:
-        preferences.edit().putString("Global_Scale","1").apply();
-        preferences.edit().putString("Global_Transparency","0.5").apply();
+        preferences.edit().putString("Global_Scale","1").commit();
+        preferences.edit().putString("Global_Transparency","0.5").commit();
 
         // Square Tool:
-        preferences.edit().putString("Square_Tool_1_x", "30").apply();
-        preferences.edit().putString("Square_Tool_2_x", "30").apply();
-        preferences.edit().putString("Square_Tool_3_x", "30").apply();
-        preferences.edit().putString("Square_Tool_4_x", "30").apply();
-        preferences.edit().putString("Square_Tool_5_x", "-153").apply();
-        preferences.edit().putString("Square_Tool_6_x", "-335").apply();
+        preferences.edit().putString("Square_Tool_1_x", "30").commit();
+        preferences.edit().putString("Square_Tool_2_x", "30").commit();
+        preferences.edit().putString("Square_Tool_3_x", "30").commit();
+        preferences.edit().putString("Square_Tool_4_x", "30").commit();
+        preferences.edit().putString("Square_Tool_5_x", "-153").commit();
+        preferences.edit().putString("Square_Tool_6_x", "-335").commit();
 
-        preferences.edit().putString("Square_Tool_1_y", "17").apply();
-        preferences.edit().putString("Square_Tool_2_y", "-172").apply();
-        preferences.edit().putString("Square_Tool_3_y", "-365").apply();
-        preferences.edit().putString("Square_Tool_4_y", "-548").apply();
-        preferences.edit().putString("Square_Tool_5_y", "19").apply();
-        preferences.edit().putString("Square_Tool_6_y", "18").apply();
+        preferences.edit().putString("Square_Tool_1_y", "17").commit();
+        preferences.edit().putString("Square_Tool_2_y", "-172").commit();
+        preferences.edit().putString("Square_Tool_3_y", "-365").commit();
+        preferences.edit().putString("Square_Tool_4_y", "-548").commit();
+        preferences.edit().putString("Square_Tool_5_y", "19").commit();
+        preferences.edit().putString("Square_Tool_6_y", "18").commit();
 
-        preferences.edit().putString("Square_Tool_z", "1").apply();
+        preferences.edit().putString("Square_Tool_z", "0").commit();
 
 
 
         // Augmented_Workspace:
-        preferences.edit().putString("Augmented_Workspace_1_x", "62").apply();
-        preferences.edit().putString("Augmented_Workspace_2_x", "62").apply();
-        preferences.edit().putString("Augmented_Workspace_3_x", "62").apply();
-        preferences.edit().putString("Augmented_Workspace_4_x", "-202").apply();
-        preferences.edit().putString("Augmented_Workspace_5_x", "-484").apply();
-        preferences.edit().putString("Augmented_Workspace_6_x", "-773").apply();
-        preferences.edit().putString("Augmented_Workspace_7_x", "-773").apply();
-        preferences.edit().putString("Augmented_Workspace_8_x", "-773").apply();
-        preferences.edit().putString("Augmented_Workspace_9_x", "-485").apply();
-        preferences.edit().putString("Augmented_Workspace_10_x", "-202").apply();
+        preferences.edit().putString("Augmented_Workspace_1_x", "62").commit();
+        preferences.edit().putString("Augmented_Workspace_2_x", "62").commit();
+        preferences.edit().putString("Augmented_Workspace_3_x", "62").commit();
+        preferences.edit().putString("Augmented_Workspace_4_x", "-202").commit();
+        preferences.edit().putString("Augmented_Workspace_5_x", "-484").commit();
+        preferences.edit().putString("Augmented_Workspace_6_x", "-773").commit();
+        preferences.edit().putString("Augmented_Workspace_7_x", "-773").commit();
+        preferences.edit().putString("Augmented_Workspace_8_x", "-773").commit();
+        preferences.edit().putString("Augmented_Workspace_9_x", "-485").commit();
+        preferences.edit().putString("Augmented_Workspace_10_x", "-202").commit();
 
-        preferences.edit().putString("Augmented_Workspace_1_y", "62").apply();
-        preferences.edit().putString("Augmented_Workspace_2_y", "-203").apply();
-        preferences.edit().putString("Augmented_Workspace_3_y", "-467").apply();
-        preferences.edit().putString("Augmented_Workspace_4_y", "-467").apply();
-        preferences.edit().putString("Augmented_Workspace_5_y", "-468").apply();
-        preferences.edit().putString("Augmented_Workspace_6_y", "-469").apply();
-        preferences.edit().putString("Augmented_Workspace_7_y", "-192").apply();
-        preferences.edit().putString("Augmented_Workspace_8_y", "62").apply();
-        preferences.edit().putString("Augmented_Workspace_9_y", "62").apply();
-        preferences.edit().putString("Augmented_Workspace_10_y", "62").apply();
+        preferences.edit().putString("Augmented_Workspace_1_y", "62").commit();
+        preferences.edit().putString("Augmented_Workspace_2_y", "-203").commit();
+        preferences.edit().putString("Augmented_Workspace_3_y", "-467").commit();
+        preferences.edit().putString("Augmented_Workspace_4_y", "-467").commit();
+        preferences.edit().putString("Augmented_Workspace_5_y", "-468").commit();
+        preferences.edit().putString("Augmented_Workspace_6_y", "-469").commit();
+        preferences.edit().putString("Augmented_Workspace_7_y", "-192").commit();
+        preferences.edit().putString("Augmented_Workspace_8_y", "62").commit();
+        preferences.edit().putString("Augmented_Workspace_9_y", "62").commit();
+        preferences.edit().putString("Augmented_Workspace_10_y", "62").commit();
 
-        preferences.edit().putString("Augmented_Workspace_z", "19").apply();
+        preferences.edit().putString("Augmented_Workspace_z", "19").commit();
 
 
         // A4_Drawing_Canvas:
         // TODO specify default values and configure this tool (A4_Drawing_Canvas)...
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_x", "180").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_2_x", "180").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_3_x", "180").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_4_x", "10").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_5_x", "-175").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_6_x", "-175").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_7_x", "-175").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_8_x", "-3").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_1_x", "180").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_2_x", "180").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_3_x", "180").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_4_x", "10").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_5_x", "-175").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_6_x", "-175").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_7_x", "-175").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_8_x", "-3").commit();
 
-        preferences.edit().putString("A4_Drawing_Canvas_1_y", "183").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_2_y", "3").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_3_y", "-170").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_4_y", "-170").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_5_y", "-170").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_6_y", "-1").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_7_y", "183").apply();
-        preferences.edit().putString("A4_Drawing_Canvas_8_y", "183").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_1_y", "183").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_2_y", "3").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_3_y", "-170").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_4_y", "-170").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_5_y", "-170").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_6_y", "-1").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_7_y", "183").commit();
+        preferences.edit().putString("A4_Drawing_Canvas_8_y", "183").commit();
 
-        preferences.edit().putString("A4_Drawing_Canvas_z", "1").apply();
+        preferences.edit().putString("A4_Drawing_Canvas_z", "0").commit();
 
 
 
         // Set the flag specifying that the shared preferences default values have been set:
-        preferences.edit().putString("Default_Values_Have_Been_Set","Yes").apply();
+        preferences.edit().putString("Default_Values_Have_Been_Set","Yes").commit();
 
     }
 

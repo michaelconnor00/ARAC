@@ -31,6 +31,8 @@ public class TrackingActivity extends ARViewActivity {
     private ImageButton tools_button;
     private ImageButton files_button;
 
+  //  private boolean is_tracking_setup = false;
+
 
 
     @Override
@@ -39,6 +41,7 @@ public class TrackingActivity extends ARViewActivity {
 
         mSDKCallback = new MetaioSDKCallbackHandler();
         mVisualSearchCallback = new VisualSearchCallbackHandler();
+        metaioSDK.setStereoRendering(true);
 
         if (metaioSDK != null) {
             metaioSDK.registerVisualSearchCallback(mVisualSearchCallback);
@@ -51,16 +54,27 @@ public class TrackingActivity extends ARViewActivity {
 
        super.onStart();
 /*
-       if(contents_loaded){
-           try {
-               setupTracking();
-           } catch (Exception e) {
-               MetaioDebug.log(Log.ERROR, "Failed to load content: " + e);
-               System.exit(0);
-           }
+       if(!is_tracking_setup){
+           mSurfaceView.queueEvent(new Runnable()
+           {
+               @Override
+               public void run() {
+                   try {
+                       setupTracking();
+                       is_tracking_setup = true;
+                   } catch (Exception e) {
+                       e.printStackTrace();
+                       // TODO Add proper error handling here...
+                   }
+
+               }
+           });
        }
-*/
+       */
+
    }
+
+
 
     @Override
     protected void onDestroy() {
@@ -80,11 +94,19 @@ public class TrackingActivity extends ARViewActivity {
     @Override
     protected void loadContents() {
         try {
-            setupTracking();
+           setupTracking();
+//           is_tracking_setup = true;
         } catch (Exception e) {
             MetaioDebug.log(Log.ERROR, "Failed to load content: " + e);
             System.exit(0);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+
     }
 
     public void launchCalibration(View view) {

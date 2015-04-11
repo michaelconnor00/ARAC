@@ -76,7 +76,11 @@
         <activity
             android:name=".CalibrationActivity"
             android:label="@string/title_activity_calibration"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.unbc.md.arac.TrackingActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"
