@@ -42,7 +42,6 @@ public class TrackingActivity extends ARViewActivity {
         mSDKCallback = new MetaioSDKCallbackHandler();
         mVisualSearchCallback = new VisualSearchCallbackHandler();
         metaioSDK.setStereoRendering(true);
-
         if (metaioSDK != null) {
             metaioSDK.registerVisualSearchCallback(mVisualSearchCallback);
         }

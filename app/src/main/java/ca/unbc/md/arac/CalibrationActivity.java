@@ -38,6 +38,7 @@ public class CalibrationActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        updateSharedPreferencesWithControlValues();
         Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
         startActivity(intent);
 
@@ -60,11 +61,12 @@ public class CalibrationActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        updateSharedPreferencesWithControlValues();
+
         //Intent intent = new Intent(getApplicationContext(), TrackingActivity.class);
         //startActivity(intent);
         //final PhysicalAlignmentToolConfiguration tool_manager = AppGlobal.physical_alignment_tool_configuration;
     }
+
 
     private void initializeMarkerSelectionSpinner() {
         marker_id_list = new ArrayList<String>();

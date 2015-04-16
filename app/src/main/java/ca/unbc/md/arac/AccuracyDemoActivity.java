@@ -1,6 +1,7 @@
 package ca.unbc.md.arac;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,12 +31,14 @@ public class AccuracyDemoActivity extends ARViewActivity {
     private VisualSearchCallbackHandler mVisualSearchCallback;
     private TextView t1;
     private float distance;
+    private ArrayList<Float> distances;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        distances = new ArrayList<>();
         t1 = (TextView) findViewById(R.id.distance); // TextView for displaying distance
 
         mSDKCallback = new MetaioSDKCallbackHandler();
@@ -175,6 +178,8 @@ public class AccuracyDemoActivity extends ARViewActivity {
                 boolean success = metaioSDK.getCosRelation(1, 2, values);
                 if (success){
                     distance = values.getTranslation().norm();
+
+                    distances.add(distance);
                     new TextViewUpdate().execute();
                 }
 
@@ -316,7 +321,16 @@ public class AccuracyDemoActivity extends ARViewActivity {
                 t1.post(new Runnable() {
                     public void run() {
                         Log.d("--ARAC--", "Text Updated");
-                        t1.setText(Float.toString(distance));
+
+                        // Calculate the average:
+                        float average = 0;
+                        float sum = 0;
+                        for(int i = 0 ; i < distances.size() ; i++){
+                            sum += distances.get(i);
+                        }
+                        average = sum / distances.size();
+
+                        t1.setText(Float.toString(average));
                     }});
             }catch (Exception e) {
                 Log.d("ARAC", e.toString());
