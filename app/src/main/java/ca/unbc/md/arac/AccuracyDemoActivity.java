@@ -2,6 +2,7 @@ package ca.unbc.md.arac;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class AccuracyDemoActivity extends ARViewActivity {
     private TextView t1;
     private float distance;
     private ArrayList<Float> distances;
+    private float max_distance = 0;
+    private float min_distance = 0;
 
 
     @Override
@@ -329,8 +332,9 @@ public class AccuracyDemoActivity extends ARViewActivity {
                             sum += distances.get(i);
                         }
                         average = sum / distances.size();
+                        Collections.sort(distances);
 
-                        t1.setText(Float.toString(average));
+                        t1.setText(Float.toString(average) + ", Min: " + Float.toString(distances.get(0)) +", Max: " + Float.toString(distances.get(distances.size() - 1)));
                     }});
             }catch (Exception e) {
                 Log.d("ARAC", e.toString());
