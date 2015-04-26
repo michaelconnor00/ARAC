@@ -88,7 +88,7 @@ public class AccuracyDemoActivity extends ARViewActivity {
         AppGlobal.physical_alignment_tool_configuration =  new PhysicalAlignmentToolManager();
         AppGlobal.current_physical_alignment_tool =
                 AppGlobal.physical_alignment_tool_configuration.physical_alignment_tools.get("accuracy_demo");
-        AppGlobal.current_geometry_filename = "Coloring_Book_Dog.png";
+        AppGlobal.current_geometry_filename = "blue_square.png";
 
         // Retrieve the tracking xmk configuration filename for the selected tool: // TODO make tracking file index variable
         String tracking_configuration_filename = AppGlobal.current_physical_alignment_tool.tool_tracking_xml_filenames.get(0);
@@ -198,36 +198,12 @@ public class AccuracyDemoActivity extends ARViewActivity {
                 }
             }
 
-            // Next, Determine the marker with the best tracking quality
-            double minimum_quality_thresh = 0.0; // Range: [0, 1]
-            double best_tracking_quality = 0.0;
-            int best_quality_index = -1;
-
             for (int i = 0; i < AppGlobal.current_physical_alignment_tool.tool_tracking_markers.size(); i++) {
                 TrackingMarker current_tracking_marker =  AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(i);
-                current_tracking_marker.tracking_state = false;
-                current_tracking_marker.marker_3d_content.setVisible(false);
-                if (current_tracking_marker.tracking_quality > minimum_quality_thresh && current_tracking_marker.tracking_quality > best_tracking_quality) {
-                    best_tracking_quality = current_tracking_marker.tracking_quality;
-                    best_quality_index = i;
-                }
+                current_tracking_marker.tracking_state = true;
+                current_tracking_marker.marker_3d_content.setVisible(true);
             }
 
-            // Finally, Set the highest quality tracking marker's geometry to visible.
-            if (best_quality_index != -1) {
-                AppGlobal.current_physical_alignment_tool.tool_tracking_markers.get(best_quality_index).marker_3d_content.setVisible(true);
-
-                // Logging:
-                if(DEBUG_OUT) {
-                    System.out.println("Chosen Tracking Marker: " + (best_quality_index + 1));
-                    System.out.println("Chosen Marker's Tracking Quality: " + best_tracking_quality);
-                }
-
-            } else {
-                // ...Do Something in the UI to show the user that there is insufficient tracking quality
-                if(DEBUG_OUT)
-                    System.out.println("Not Tracking: All tracking quality values are less than the threshold of: " + minimum_quality_thresh);
-            }
             if(DEBUG_OUT)
                 System.out.println("----End of Tracking Event----");
         }

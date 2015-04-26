@@ -41,7 +41,10 @@ public class TrackingActivity extends ARViewActivity {
 
         mSDKCallback = new MetaioSDKCallbackHandler();
         mVisualSearchCallback = new VisualSearchCallbackHandler();
+
+        // TODO can enable this when using a HUD
         metaioSDK.setStereoRendering(true);
+
         if (metaioSDK != null) {
             metaioSDK.registerVisualSearchCallback(mVisualSearchCallback);
         }

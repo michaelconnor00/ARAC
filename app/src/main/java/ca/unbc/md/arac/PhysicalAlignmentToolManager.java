@@ -178,7 +178,7 @@ public class PhysicalAlignmentToolManager {
                 geometry.setName("" + i);
                 geometry.setVisible(false);
                 geometry.setTransparency((float)getGlobalTransparency());
-                geometry.setScale((float)getGlobalScale());
+                geometry.setScale(0.3f);
 
 
                 // Set the translation offsets and rotation for each specific marker ID.
@@ -191,7 +191,7 @@ public class PhysicalAlignmentToolManager {
                             (float) Math.PI / 2, 0.0f, 0.0f));
                 }
 
-                geometry.setTranslation(new Vector3d(getPhysicalToolAttribute("accuracy_demo", i ,"x"), getPhysicalToolAttribute("accuracy_demo", i ,"y"), getPhysicalToolAttribute("accuracy_demo" ,"z")));
+                geometry.setTranslation(new Vector3d(getPhysicalToolAttribute("accuracy_demo", i ,"x"), getPhysicalToolAttribute("accuracy_demo", i ,"y"), 0));
                 geometry.setRotation(rotation);
 
                 tracking_marker = new TrackingMarker(i, geometry);
@@ -452,21 +452,21 @@ public class PhysicalAlignmentToolManager {
         preferences.edit().putString("Global_Transparency","0.5").commit();
 
         // Square Tool:
-        preferences.edit().putString("Square_Tool_1_x", "30").commit();
-        preferences.edit().putString("Square_Tool_2_x", "30").commit();
-        preferences.edit().putString("Square_Tool_3_x", "30").commit();
-        preferences.edit().putString("Square_Tool_4_x", "30").commit();
-        preferences.edit().putString("Square_Tool_5_x", "-153").commit();
-        preferences.edit().putString("Square_Tool_6_x", "-335").commit();
+        preferences.edit().putString("Square_Edge_1_x", "30").commit();
+        preferences.edit().putString("Square_Edge_2_x", "30").commit();
+        preferences.edit().putString("Square_Edge_3_x", "30").commit();
+        preferences.edit().putString("Square_Edge_4_x", "30").commit();
+        preferences.edit().putString("Square_Edge_5_x", "-153").commit();
+        preferences.edit().putString("Square_Edge_6_x", "-335").commit();
 
-        preferences.edit().putString("Square_Tool_1_y", "17").commit();
-        preferences.edit().putString("Square_Tool_2_y", "-172").commit();
-        preferences.edit().putString("Square_Tool_3_y", "-365").commit();
-        preferences.edit().putString("Square_Tool_4_y", "-548").commit();
-        preferences.edit().putString("Square_Tool_5_y", "19").commit();
-        preferences.edit().putString("Square_Tool_6_y", "18").commit();
+        preferences.edit().putString("Square_Edge_1_y", "17").commit();
+        preferences.edit().putString("Square_Edge_2_y", "-172").commit();
+        preferences.edit().putString("Square_Edge_3_y", "-365").commit();
+        preferences.edit().putString("Square_Edge_4_y", "-548").commit();
+        preferences.edit().putString("Square_Edge_5_y", "19").commit();
+        preferences.edit().putString("Square_Edge_6_y", "18").commit();
 
-        preferences.edit().putString("Square_Tool_z", "0").commit();
+        preferences.edit().putString("Square_Edge_z", "0").commit();
 
 
 
@@ -497,8 +497,6 @@ public class PhysicalAlignmentToolManager {
 
 
         // A4_Drawing_Canvas:
-        // TODO specify default values and configure this tool (A4_Drawing_Canvas)...
-
         preferences.edit().putString("A4_Drawing_Canvas_1_x", "180").commit();
         preferences.edit().putString("A4_Drawing_Canvas_2_x", "180").commit();
         preferences.edit().putString("A4_Drawing_Canvas_3_x", "180").commit();
@@ -518,8 +516,6 @@ public class PhysicalAlignmentToolManager {
         preferences.edit().putString("A4_Drawing_Canvas_8_y", "183").commit();
 
         preferences.edit().putString("A4_Drawing_Canvas_z", "0").commit();
-
-
 
         // Set the flag specifying that the shared preferences default values have been set:
         preferences.edit().putString("Default_Values_Have_Been_Set","Yes").commit();

@@ -32,7 +32,7 @@ public class SettingsActivity extends Activity {
     }
 
 
-    protected void resetCalibrationSettings(View view){
+    public void resetCalibrationSettings(View view){
         AppGlobal.physical_alignment_tool_configuration.setPhysicalToolSharedPreferencesToDefault();
     }
 
